@@ -14,9 +14,9 @@
       # Default settings for all hosts
       "*" = {
         # Control master for connection multiplexing (faster subsequent connections)
-        controlMaster = "auto";
-        controlPath = "~/.ssh/control-%r@%h:%p";
-        controlPersist = "10m";
+        # controlMaster = "auto";
+        # controlPath = "~/.ssh/control-%r@%h:%p";
+        # controlPersist = "10m";
         
         # Compression for slower connections
         compression = false;
