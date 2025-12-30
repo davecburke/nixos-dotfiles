@@ -25,6 +25,11 @@
         vscode
         ksnip
         code-cursor
+        meld
+        firefox-devedition
+        postman
+        brave
+        jdk21_headless
     ];
 
     programs.zsh = {
@@ -54,6 +59,7 @@
     
     home.sessionVariables = {
         NPM_CONFIG_PREFIX = "$HOME/.npm-global";
+        JAVA_HOME = "${pkgs.jdk21_headless}";
     };
 
     home.sessionPath = [
