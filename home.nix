@@ -29,7 +29,7 @@
         firefox-devedition
         postman
         brave
-        jdk21_headless
+        slack
     ];
 
     programs.zsh = {
