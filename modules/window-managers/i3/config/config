@@ -233,7 +233,7 @@ exec_always --no-startup-id $HOME/.config/greenclip/launch.sh
 # calculator
 #bindsym XF86Calculator exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
 bindsym XF86Calculator exec gnome-calculator
-for_window [class="gnome-calculator"] floating enable, resize set 200 300, move position center
+for_window [class="gnome-calculator"] floating enable, resize set 400 600, move position center
 
 # screenshot
 bindsym Print exec ksnip -r
