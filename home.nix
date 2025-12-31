@@ -39,12 +39,21 @@
         syntaxHighlighting.enable = true;
         oh-my-zsh = {
             enable = true;
-            theme = "robbyrussell"; # blinks is also really nice
+            #theme = "robbyrussell"; # blinks is also really nice
+            theme = "";
             extraConfig = ''
                 zstyle :omz:plugins:ssh-agent identities id_rsa_personal id_rsa
             '';
             plugins = [ "command-not-found ssh-agent" ];
         };
+
+        plugins = [
+            {
+                name = "powerlevel10k";
+                src = pkgs.zsh-powerlevel10k;
+                file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+            }
+        ];
 
         initContent = ''
         # Extra Zsh config here
@@ -54,6 +63,7 @@
         export PATH="$HOME/.npm-global/bin:$PATH"
         eval "$(pyenv init --path)"
         fastfetch
+        [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
         '';
     };
     
