@@ -33,5 +33,5 @@ if check_youtube_playing; then
     exit 0
 else
     # No YouTube playing, proceed with lock
-    betterlockscreen -l dim
+    i3lock -d -c 000000
 fi
