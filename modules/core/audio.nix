@@ -13,6 +13,8 @@
     environment.systemPackages = with pkgs; [
         libcanberra
         libcanberra-gtk3
+        pamixer
+        playerctl
     ];        
 
 }
