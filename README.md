@@ -102,3 +102,29 @@ Roll back if something breaks
 ```bash
 sudo nixos-rebuild switch --rollback
 ```
+## ZBOOK
+### Fingerprint
+Enable firmware updates
+```bash
+fwupdmgr get-devices
+fwupdmgr enable-remote lvfs-testing
+fwupdmgr refresh --force
+fwupdmgr get-updates
+fwupdmgr update
+```
+Reboot
+```bash
+fprintd-enroll
+```
+You want to end with:
+```bash
+Enroll result: enroll-completed
+```
+Verify
+```bash
+fprintd-list $USER
+```
+Expected:
+```bash
+right-index-finger
+```

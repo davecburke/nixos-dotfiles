@@ -1,27 +1,25 @@
 { config, pkgs, ... }:
 {
-  # If you prefer to keep hardware import here:
   imports = [
     ../hardware-configuration.nix
     ../../users/dave.nix
   ];
 
-  # Bootloader (host-level)
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos";
 
-  # # User(s) on this machine
-  # users.users.dave = {
-  #   isNormalUser = true;
-  #   description = "David Burke";
-  #   extraGroups = [ "networkmanager" "wheel" ];
-  #   packages = with pkgs; [
-  #     # keep empty if you want
-  #   ];
-  # };
+  # Fingerprint reader support / firmware updates
+  services.fwupd.enable = true;
+  services.fprintd.enable = true;
 
-  # Do not move this between machines/configs
+  # Fingerprint auth (do NOT set `login` when using GDM; it conflicts)
+  security.pam.services.sudo.fprintAuth = true;
+
+  # GNOME / GDM
+  security.pam.services.gdm.fprintAuth = true;
+  security.pam.services.gdm-password.fprintAuth = true;
+
   system.stateVersion = "25.11";
 }
