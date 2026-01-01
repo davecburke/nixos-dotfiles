@@ -15,6 +15,7 @@
         libcanberra-gtk3
         pamixer
         playerctl
+        pulseaudio  # Provides pactl for PipeWire PulseAudio compatibility
     ];        
 
 }
