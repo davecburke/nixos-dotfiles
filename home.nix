@@ -30,6 +30,7 @@
         postman
         brave
         slack
+        libreoffice
     ];
 
     programs.zsh = {
