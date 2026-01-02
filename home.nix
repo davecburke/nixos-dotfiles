@@ -31,6 +31,7 @@
         brave
         slack
         libreoffice
+        virt-viewer
     ];
 
     programs.zsh = {
