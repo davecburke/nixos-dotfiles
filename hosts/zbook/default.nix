@@ -1,25 +1,25 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ../hardware-configuration.nix
-    ../../users/dave.nix
-  ];
+    imports = [
+        ../hardware-configuration.nix
+        ../../users/dave.nix
+    ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos";
+    networking.hostName = "nixos";
 
-  # Fingerprint reader support / firmware updates
-  services.fwupd.enable = true;
-  services.fprintd.enable = true;
+    # Fingerprint reader support / firmware updates
+    services.fwupd.enable = true;
+    services.fprintd.enable = true;
 
-  # Fingerprint auth (do NOT set `login` when using GDM; it conflicts)
-  security.pam.services.sudo.fprintAuth = true;
+    # Fingerprint auth (do NOT set `login` when using GDM; it conflicts)
+    security.pam.services.sudo.fprintAuth = true;
 
-  # GNOME / GDM
-  security.pam.services.gdm.fprintAuth = true;
-  security.pam.services.gdm-password.fprintAuth = true;
+    # GNOME / GDM
+    security.pam.services.gdm.fprintAuth = true;
+    security.pam.services.gdm-password.fprintAuth = true;
 
-  system.stateVersion = "25.11";
+    system.stateVersion = "25.11";
 }

@@ -107,7 +107,7 @@
     # #  wget
     #     google-chrome
     #     code-cursor
-    #     git	
+    #     git   
     # ];
 
     # Some programs need SUID wrappers, can be configured further or are
