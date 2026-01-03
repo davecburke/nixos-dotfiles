@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgsUnstable ? pkgs, ... }:
 
 {
     imports = [
@@ -19,19 +19,19 @@
     };
     home.stateVersion = "25.11";
 
-    home.packages = with pkgs; [
-        google-chrome
-        lazygit
-        vscode
-        ksnip
-        code-cursor
-        meld
-        firefox-devedition
-        postman
-        brave
-        slack
-        libreoffice
-        virt-viewer
+    home.packages = [
+        pkgs.google-chrome
+        pkgs.lazygit
+        pkgsUnstable.vscode
+        pkgs.ksnip
+        pkgsUnstable.code-cursor
+        pkgs.meld
+        pkgs.firefox-devedition
+        pkgs.postman
+        pkgs.brave
+        pkgs.slack
+        pkgs.libreoffice
+        pkgs.virt-viewer
     ];
 
     programs.zsh = {

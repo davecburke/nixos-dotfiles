@@ -3,13 +3,14 @@
 
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-25.11";
+        nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
         home-manager = {
         url = "github:nix-community/home-manager/release-25.11";
         inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, home-manager, ... }: {
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
         nixosConfigurations.nixos-i3-gnome = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
@@ -34,7 +35,13 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.dave = import ./home.nix;
+                        users.dave = { config, pkgs, ... }: import ./home.nix {
+                            inherit config pkgs;
+                            pkgsUnstable = import nixpkgs-unstable {
+                                system = "x86_64-linux";
+                                config.allowUnfree = true;
+                            };
+                        };
                         backupFileExtension = "backup";
                     };
                 }
