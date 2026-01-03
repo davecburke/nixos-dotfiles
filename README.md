@@ -79,7 +79,7 @@ sudo nix-collect-garbage -d
 ```
 ## Check for updates
 ```bash
-nix flake update
+sudo nix flake update
 ```
 This updates flake.lock with newer versions of nixpkgs and other inputs.
 To see what changed:
