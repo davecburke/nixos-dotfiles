@@ -42,18 +42,23 @@ chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_personal
 ### 4. Clone the repo
 Add personal identity
 ```bash
+eval "$(ssh-agent -s)"
 ssh-add -D #remove identities
 ssh-add ~/.ssh/id_rsa_personal
 ```
 Clone the repo
 ```bash
 cd ~
-git clone https://github.com/davecburke/nixos-config.git 
+git clone https://github.com/davecburke/nixos-dotfiles.git 
 ```
 
 ### 5. Move the generated hardware-configuration.nix to your flake's expected path:
 ```bash
 sudo mv /etc/nixos/hardware-configuration.nix ~/nixos-dotfiles/hosts/hardware-configuration.nix
+```
+Change ownership
+```bash
+sudo chown dave:users ~/nixos-dotfiles/hosts/hardware-configuration.nix
 ```
 
 ### 6. Build and apply your config:
