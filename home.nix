@@ -91,6 +91,9 @@
         executable = true;
     };
 
+    #zsh powerlevel10k config
+    home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
+
     #dunst
     xdg.configFile."dunst" = {
         source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/dunst/config;
