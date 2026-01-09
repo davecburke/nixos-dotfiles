@@ -15,7 +15,7 @@
             system = "x86_64-linux";
             modules = [
                 ./configuration.nix
-                ./hosts/zbook/default.nix
+                ./hosts/vm/default.nix
                 ./modules/desktop-managers/gnome.nix
                 ./modules/display-managers/gdm.nix
                 ./modules/window-managers/i3/i3.nix
@@ -35,7 +35,43 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.dave = { config, pkgs, ... }: import ./home.nix {
+                        users.dave = { config, pkgs, ... }: import ./home/dave-i3.nix {
+                            inherit config pkgs;
+                            pkgsUnstable = import nixpkgs-unstable {
+                                system = "x86_64-linux";
+                                config.allowUnfree = true;
+                            };
+                        };
+                        backupFileExtension = "backup";
+                    };
+                }
+            ];
+        };
+        nixosConfigurations.nixos-hyprland = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+                # ./configuration.nix
+                ./hosts/vm/default.nix
+                #./modules/desktop-managers/gnome.nix
+                ./modules/display-managers/gdm.nix
+                ./modules/window-managers/hyprland/hyprland.nix
+                ./modules/core/fonts.nix
+                # ./modules/themes/nordic.nix
+                ./modules/core/programs.nix
+                ./modules/core/audio.nix
+                ./modules/core/locale.nix
+                ./modules/core/networking.nix
+                ./modules/core/nix.nix
+                ./modules/core/printing.nix
+                ./modules/core/system-packages.nix
+                ./modules/core/unfree.nix
+                #./modules/core/xserver.nix
+                home-manager.nixosModules.home-manager
+                {
+                    home-manager = {
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        users.dave = { config, pkgs, ... }: import ./home/dave-hyprland.nix {
                             inherit config pkgs;
                             pkgsUnstable = import nixpkgs-unstable {
                                 system = "x86_64-linux";

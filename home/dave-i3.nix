@@ -2,8 +2,8 @@
 
 {
     imports = [
-        ./modules/themes/gtk.nix
-        ./modules/programs/ssh/ssh.nix
+        ../modules/themes/gtk.nix
+        ../modules/programs/ssh/ssh.nix
     ];
     
     home.username = "dave";
@@ -80,14 +80,14 @@
 
     #feh
     home.file.".fehbg" = {
-        source = ./scripts/.fehbg;
+        source = ../scripts/.fehbg;
         executable = true;
     };
 
     #greenclip
     home.file.".config/greenclip.toml".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/greenclip/greenclip.toml;
     home.file.".config/greenclip/launch.sh" = {
-        source = ./modules/programs/greenclip/launch.sh;
+        source = ../modules/programs/greenclip/launch.sh;
         executable = true;
     };
 
