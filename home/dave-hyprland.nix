@@ -33,6 +33,10 @@
         pkgs.virt-viewer
     ];
 
+    home.file.".config/hypr".source = ../modules/window-managers/hyprland/config/hyper;
+    home.file.".config/waybar".source = ../modules/window-managers/hyprland/config/waybar;
+    home.file.".config/foot".source = ../modules/window-managers/hyprland/config/foot;
+
     programs.zsh = {
         enable = true;
         enableCompletion = true;
