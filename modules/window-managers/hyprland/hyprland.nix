@@ -11,5 +11,6 @@
         kitty
         waybar
         hyprpaper
+        wofi
     ];
 }

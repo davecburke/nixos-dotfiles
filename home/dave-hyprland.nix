@@ -33,7 +33,24 @@
         pkgs.virt-viewer
     ];
 
-    home.file.".config/hypr".source =  ../modules/window-managers/hyprland/config/hypr;
+
+    xdg.configFile."hypr" = {
+        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/hypr;
+        recursive = true;
+        force = true;
+    };
+
+    xdg.configFile."waybar" = {
+        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/waybar;
+        recursive = true;
+        force = true;
+    };
+
+    xdg.configFile."foot" = {
+        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/foot;
+        recursive = true;
+        force = true;
+    };
 
     programs.zsh = {
         enable = true;

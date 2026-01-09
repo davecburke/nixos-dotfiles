@@ -66,6 +66,7 @@
                 ./modules/core/system-packages.nix
                 ./modules/core/unfree.nix
                 #./modules/core/xserver.nix
+                ./modules/programs/ns/ns.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
