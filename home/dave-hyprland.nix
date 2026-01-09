@@ -33,9 +33,7 @@
         pkgs.virt-viewer
     ];
 
-    home.file.".config/hypr".source = ../modules/window-managers/hyprland/config/hypr;
-    home.file.".config/waybar".source = ../modules/window-managers/hyprland/config/waybar;
-    home.file.".config/foot".source = ../modules/window-managers/hyprland/config/foot;
+    home.file.".config/hypr".source =  ../modules/window-managers/hyprland/config/hypr;
 
     programs.zsh = {
         enable = true;
