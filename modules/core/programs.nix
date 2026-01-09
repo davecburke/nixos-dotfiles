@@ -12,6 +12,15 @@
         python3
         jdk21_headless
         usbutils
+        (writeShellApplication {
+            name = "ns";
+            runtimeInputs = with pkgs; [
+                fzf
+                nix-search-tv
+            ];
+            text = builtins.readFile "${nix-search-tv.src}/nixpkgs.sh";
+            excludeShellChecks = [ "SC2016" ];
+        })
     ];
     # Create /etc/jvm/java-21 -> <nix store path to the JDK>
     environment.etc."jvm/java-21".source = pkgs.jdk21_headless;
