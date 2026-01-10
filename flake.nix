@@ -51,7 +51,7 @@
             system = "x86_64-linux";
             modules = [
                 # ./configuration.nix
-                ./hosts/vm/default.nix
+                ./hosts/zbook/default.nix
                 #./modules/desktop-managers/gnome.nix
                 ./modules/display-managers/gdm.nix
                 ./modules/window-managers/hyprland/hyprland.nix
