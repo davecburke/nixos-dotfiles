@@ -55,6 +55,8 @@ button:hover {
 #memory,
 #disk,
 #network,
+#custom-openweather,
+#custom-dunst,
 #tray {
     padding: 0 8px;
     color: @white;
@@ -100,4 +102,14 @@ button:hover {
 
 #tray {
     background-color: #2980b9;
+}
+
+#custom-openweather {
+    color: @blu;
+    border-bottom: 4px solid @blu;
+}
+
+#custom-dunst {
+    color: @red;
+    border-bottom: 4px solid @red;
 }

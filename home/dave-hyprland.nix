@@ -31,7 +31,10 @@
         pkgs.slack
         pkgs.libreoffice
         pkgs.virt-viewer
+        pkgs.hyprpolkitagent
     ];
+
+    services.hyprpolkitagent.enable = true;
 
 
     xdg.configFile."hypr" = {

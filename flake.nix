@@ -65,6 +65,7 @@
                 ./modules/core/printing.nix
                 ./modules/core/system-packages.nix
                 ./modules/core/unfree.nix
+                ./modules/programs/dunst/dunst.nix
                 #./modules/core/xserver.nix
                 home-manager.nixosModules.home-manager
                 {
