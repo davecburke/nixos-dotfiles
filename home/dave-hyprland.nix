@@ -32,13 +32,17 @@
         pkgs.slack
         pkgs.libreoffice
         pkgs.virt-viewer
-        pkgs.hyprpolkitagent
         pkgs.xfce.thunar
         pkgs.qalculate-gtk
     ];
 
     services.hyprpolkitagent.enable = true;
 
+    services.hypridle = {
+        enable = true;
+        # Config file is managed manually at ~/.config/hypr/hypridle.conf
+        # (via symlink from modules/window-managers/hyprland/config/hypr/hypridle.conf)
+    };
 
     xdg.configFile."hypr" = {
         source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/hypr;
