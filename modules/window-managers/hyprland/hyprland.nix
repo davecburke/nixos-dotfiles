@@ -14,5 +14,10 @@
         wofi
         cliphist
         wl-clipboard
+        hyprlock
+        grimblast
+        # swappy
+        grim
+        slurp
     ];
 }

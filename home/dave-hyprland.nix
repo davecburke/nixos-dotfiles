@@ -109,11 +109,11 @@
     # };
 
     #greenclip
-    home.file.".config/greenclip.toml".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/greenclip/greenclip.toml;
-    home.file.".config/greenclip/launch.sh" = {
-        source = ../modules/programs/greenclip/launch.sh;
-        executable = true;
-    };
+    # home.file.".config/greenclip.toml".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/greenclip/greenclip.toml;
+    # home.file.".config/greenclip/launch.sh" = {
+    #     source = ../modules/programs/greenclip/launch.sh;
+    #     executable = true;
+    # };
 
     #cliphist
     home.file.".config/cliphist/launch.sh" = {

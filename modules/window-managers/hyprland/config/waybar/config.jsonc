@@ -144,7 +144,7 @@
     "custom/dunst": {
         "exec": "python3 ~/.config/waybar/scripts/dunst-notify/dunst-notify.py --prefix '' --color '#bd2c40' --nosound",
         "on-click": "dunstctl history-pop",
-        "on-click-middle": "systemctl --user restart dunst",
+        "on-click-middle": "pkill dunst; dunst &",
         "restart-interval": 1
     },
     "custom/openweather": {
