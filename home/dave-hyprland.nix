@@ -16,6 +16,7 @@
             };
         };
     };
+
     home.stateVersion = "25.11";
 
     home.packages = [
@@ -32,6 +33,8 @@
         pkgs.libreoffice
         pkgs.virt-viewer
         pkgs.hyprpolkitagent
+        pkgs.xfce.thunar
+        pkgs.qalculate-gtk
     ];
 
     services.hyprpolkitagent.enable = true;
@@ -112,6 +115,15 @@
         executable = true;
     };
 
+    #cliphist
+    home.file.".config/cliphist/launch.sh" = {
+        source = ../modules/programs/cliphist/launch.sh;
+        executable = true;
+    };
+    home.file.".config/cliphist/static_entries.txt" = {
+        source = ../modules/programs/cliphist/static_entries.txt;
+    };
+
     #zsh powerlevel10k config
     home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
 
@@ -135,6 +147,7 @@
         recursive = true;
         force = true;
     };
+
 
     #TODO: Make this optional only if i3 is selected as the window manager
     #i3

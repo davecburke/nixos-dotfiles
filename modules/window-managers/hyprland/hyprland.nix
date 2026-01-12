@@ -12,5 +12,7 @@
         waybar
         hyprpaper
         wofi
+        cliphist
+        wl-clipboard
     ];
 }

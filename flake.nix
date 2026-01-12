@@ -50,13 +50,10 @@
         nixosConfigurations.nixos-hyprland = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-                # ./configuration.nix
                 ./hosts/zbook/default.nix
-                #./modules/desktop-managers/gnome.nix
                 ./modules/display-managers/gdm.nix
                 ./modules/window-managers/hyprland/hyprland.nix
                 ./modules/core/fonts.nix
-                # ./modules/themes/nordic.nix
                 ./modules/core/programs.nix
                 ./modules/core/audio.nix
                 ./modules/core/locale.nix
@@ -66,7 +63,7 @@
                 ./modules/core/system-packages.nix
                 ./modules/core/unfree.nix
                 ./modules/programs/dunst/dunst.nix
-                #./modules/core/xserver.nix
+                ./modules/programs/rofi/rofi.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {

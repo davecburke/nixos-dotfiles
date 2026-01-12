@@ -1,0 +1,8 @@
+sf project generate manifest --metadata ApexClass:REST_Donation ApexClass:REST_DonationTest ApexTrigger:paymentOpportunity
+sf project deploy start --manifest package.xml --test-level RunSpecifiedTests --tests processPaymentTest REST_DonationTest --target-org "Greenham Prod"
+sf project deploy start --manifest ./destroy/package.xml --pre-destructive-changes ./destroy/destructiveChanges.xml --target-org "Greenham Prod"
+sf project generate manifest --output-dir destroy  --metadata ApexClass:GDGC_DonationController ApexClass:GDGC_DonationControllerTest ApexPage:GDGC_Participant --type destroy
+git commit --amend --no-edit
+config push git@github-personal:davecburke/dotfiles.git
+brscan-skey
+python3 -m http.server
