@@ -81,5 +81,39 @@
                 }
             ];
         };
+        nixosConfigurations.nixos-niri = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+                ./hosts/zbook/default.nix
+                ./modules/display-managers/gdm.nix
+                ./modules/window-managers/niri/niri.nix
+                ./modules/core/fonts.nix
+                ./modules/core/programs.nix
+                ./modules/core/audio.nix
+                ./modules/core/locale.nix
+                ./modules/core/networking.nix
+                ./modules/core/nix.nix
+                ./modules/core/printing.nix
+                ./modules/core/system-packages.nix
+                ./modules/core/unfree.nix
+                ./modules/programs/dunst/dunst.nix
+                ./modules/programs/rofi/rofi.nix
+                home-manager.nixosModules.home-manager
+                {
+                    home-manager = {
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        users.dave = { config, pkgs, ... }: import ./home/dave-niri.nix {
+                            inherit config pkgs;
+                            pkgsUnstable = import nixpkgs-unstable {
+                                system = "x86_64-linux";
+                                config.allowUnfree = true;
+                            };
+                        };
+                        backupFileExtension = "backup";
+                    };
+                }
+            ];
+        };
     };
 }
