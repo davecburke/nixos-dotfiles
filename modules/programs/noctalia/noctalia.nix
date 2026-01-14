@@ -1,6 +1,13 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, pkgsUnstable ? pkgs, ... }:
 {
-    environment.systemPackages = with pkgs; [
-        inputs.noctalia.packages.${pkgs.system}.default
+    # Enable evolution-data-server for calendar events support
+    services.gnome.evolution-data-server.enable = true;
+
+    environment.systemPackages = with pkgsUnstable; [
+        (noctalia-shell.override { calendarSupport = true; })
+        evolution
+        evolution-ews
+        evolution-data-server
+        gnome-keyring
     ];
 }

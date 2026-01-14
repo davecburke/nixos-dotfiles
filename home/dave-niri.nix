@@ -39,29 +39,29 @@
 
     services.hyprpolkitagent.enable = true;
 
-    services.hypridle = {
-        enable = true;
-        # Config file is managed manually at ~/.config/hypr/hypridle.conf
-        # (via symlink from modules/window-managers/hyprland/config/hypr/hypridle.conf)
-    };
+    # services.hypridle = {
+    #     enable = true;
+    #     # Config file is managed manually at ~/.config/hypr/hypridle.conf
+    #     # (via symlink from modules/window-managers/hyprland/config/hypr/hypridle.conf)
+    # };
 
-    xdg.configFile."hypr" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/hypr;
-        recursive = true;
-        force = true;
-    };
+    # xdg.configFile."hypr" = {
+    #     source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/hypr;
+    #     recursive = true;
+    #     force = true;
+    # };
 
-    xdg.configFile."waybar" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/waybar;
-        recursive = true;
-        force = true;
-    };
+    # xdg.configFile."waybar" = {
+    #     source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/waybar;
+    #     recursive = true;
+    #     force = true;
+    # };
 
-    xdg.configFile."foot" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/foot;
-        recursive = true;
-        force = true;
-    };
+    # xdg.configFile."foot" = {
+    #     source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/foot;
+    #     recursive = true;
+    #     force = true;
+    # };
 
     xdg.configFile."themes" = {
         source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/themes;
@@ -133,13 +133,13 @@
     # };
 
     #cliphist
-    home.file.".config/cliphist/launch.sh" = {
-        source = ../modules/programs/cliphist/launch.sh;
-        executable = true;
-    };
-    home.file.".config/cliphist/static_entries.txt" = {
-        source = ../modules/programs/cliphist/static_entries.txt;
-    };
+    # home.file.".config/cliphist/launch.sh" = {
+    #     source = ../modules/programs/cliphist/launch.sh;
+    #     executable = true;
+    # };
+    # home.file.".config/cliphist/static_entries.txt" = {
+    #     source = ../modules/programs/cliphist/static_entries.txt;
+    # };
 
     #zsh powerlevel10k config
     home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
@@ -152,11 +152,11 @@
     };
     
     #dunst
-    xdg.configFile."dunst" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/dunst/config;
-        recursive = true;
-        force = true;
-    };
+    # xdg.configFile."dunst" = {
+    #     source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/dunst/config;
+    #     recursive = true;
+    #     force = true;
+    # };
 
     #polybar
     # xdg.configFile."polybar" = {
@@ -166,11 +166,11 @@
     # };
 
     #rofi
-    xdg.configFile."rofi" = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/dave/nixos-dotfiles/modules/programs/rofi/config";
-        recursive = true;
-        force = true;
-    };
+    # xdg.configFile."rofi" = {
+    #     source = config.lib.file.mkOutOfStoreSymlink "/home/dave/nixos-dotfiles/modules/programs/rofi/config";
+    #     recursive = true;
+    #     force = true;
+    # };
 
 
     #TODO: Make this optional only if i3 is selected as the window manager

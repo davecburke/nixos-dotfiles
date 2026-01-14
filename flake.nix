@@ -8,18 +8,18 @@
             url = "github:nix-community/home-manager/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        quickshell = {
-            url = "github:outfoxxed/quickshell";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-        noctalia = {
-            url = "github:noctalia-dev/noctalia-shell";
-            inputs.nixpkgs.follows = "nixpkgs";
-            inputs.quickshell.follows = "quickshell";
-        };
+        # quickshell = {
+        #     url = "github:outfoxxed/quickshell";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
+        # noctalia = {
+        #     url = "github:noctalia-dev/noctalia-shell";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        #     inputs.quickshell.follows = "quickshell";
+        # };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, quickshell, ... }: {
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
         nixosConfigurations.nixos-i3-gnome = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
@@ -92,12 +92,10 @@
         };
         nixosConfigurations.nixos-niri = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = { 
-                inputs = {
-                    inherit noctalia quickshell;
-                    nixpkgs = nixpkgs;
-                    nixpkgs-unstable = nixpkgs-unstable;
-                    home-manager = home-manager;
+            specialArgs = {
+                pkgsUnstable = import nixpkgs-unstable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
                 };
             };
             modules = [
@@ -115,8 +113,8 @@
                 ./modules/core/unfree.nix
                 ./modules/core/bluetooth.nix
                 ./modules/core/power.nix
-                ./modules/programs/dunst/dunst.nix
-                ./modules/programs/rofi/rofi.nix
+                # ./modules/programs/dunst/dunst.nix
+                # ./modules/programs/rofi/rofi.nix
                 ./modules/programs/noctalia/noctalia.nix
                 home-manager.nixosModules.home-manager
                 {

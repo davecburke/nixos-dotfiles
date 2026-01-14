@@ -4,14 +4,15 @@
     programs.niri.enable = true;
 
     environment.systemPackages = with pkgs; [
-        foot
+        #ghostty
+        # foot
         alacritty
-        waybar
-        hyprpaper
-        wofi
+        # waybar
+        # hyprpaper
+        # wofi
         cliphist
         wl-clipboard
-        hyprlock
+        # hyprlock
         grimblast
         # swappy
         grim
