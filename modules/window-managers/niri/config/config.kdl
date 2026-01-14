@@ -382,7 +382,8 @@ binds {
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
     XF86Calculator { spawn "qalculate-gtk"; }
-    Print { spawn-sh "$HOME/.config/hypr/screenshot.sh"; }
+    // Print { spawn-sh "$HOME/.config/hypr/screenshot.sh"; }
+    Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty -f -"; }
     Mod+C { spawn-sh "cliphist list | rofi -dmenu -i -p \"Clipboard\" -theme-str 'window {width: 40%;}' | cliphist decode | wl-copy"; }
     Mod+Shift+E { spawn-sh "rofi -show power-menu -modi power-menu:rofi-power-menu";}
     Mod+Shift+Return { spawn "google-chrome-stable";}

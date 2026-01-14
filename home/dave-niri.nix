@@ -23,7 +23,7 @@
         pkgs.google-chrome
         pkgs.lazygit
         pkgsUnstable.vscode
-        pkgs.ksnip
+        # pkgs.ksnip
         pkgsUnstable.code-cursor
         pkgs.meld
         pkgs.firefox-devedition

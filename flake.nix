@@ -113,6 +113,8 @@
                 ./modules/core/printing.nix
                 ./modules/core/system-packages.nix
                 ./modules/core/unfree.nix
+                ./modules/core/bluetooth.nix
+                ./modules/core/power.nix
                 ./modules/programs/dunst/dunst.nix
                 ./modules/programs/rofi/rofi.nix
                 ./modules/programs/noctalia/noctalia.nix

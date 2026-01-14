@@ -21,5 +21,6 @@
         fuzzel
         swaybg
         swaylock
+        satty
     ];
 }
