@@ -5,12 +5,21 @@
         nixpkgs.url = "nixpkgs/nixos-25.11";
         nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
         home-manager = {
-        url = "github:nix-community/home-manager/release-25.11";
-        inputs.nixpkgs.follows = "nixpkgs";
+            url = "github:nix-community/home-manager/release-25.11";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        quickshell = {
+            url = "github:outfoxxed/quickshell";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        noctalia = {
+            url = "github:noctalia-dev/noctalia-shell";
+            inputs.nixpkgs.follows = "nixpkgs";
+            inputs.quickshell.follows = "quickshell";
         };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, noctalia, quickshell, ... }: {
         nixosConfigurations.nixos-i3-gnome = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
@@ -83,6 +92,14 @@
         };
         nixosConfigurations.nixos-niri = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
+            specialArgs = { 
+                inputs = {
+                    inherit noctalia quickshell;
+                    nixpkgs = nixpkgs;
+                    nixpkgs-unstable = nixpkgs-unstable;
+                    home-manager = home-manager;
+                };
+            };
             modules = [
                 ./hosts/zbook/default.nix
                 ./modules/display-managers/gdm.nix
@@ -98,6 +115,7 @@
                 ./modules/core/unfree.nix
                 ./modules/programs/dunst/dunst.nix
                 ./modules/programs/rofi/rofi.nix
+                ./modules/programs/noctalia/noctalia.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {

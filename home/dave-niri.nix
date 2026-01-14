@@ -34,6 +34,7 @@
         pkgs.virt-viewer
         pkgs.xfce.thunar
         pkgs.qalculate-gtk
+        pkgs.quickshell
     ];
 
     services.hyprpolkitagent.enable = true;
@@ -58,6 +59,18 @@
 
     xdg.configFile."foot" = {
         source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/hyprland/config/foot;
+        recursive = true;
+        force = true;
+    };
+
+    xdg.configFile."themes" = {
+        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/themes;
+        recursive = true;
+        force = true;
+    };
+
+    xdg.configFile."noctalia" = {
+        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/noctalia/config;
         recursive = true;
         force = true;
     };
