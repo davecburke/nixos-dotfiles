@@ -1,0 +1,109 @@
+# Regreet configuration with Nord theme
+# This config uses Nord color palette and displays time and weather
+# Config location: ~/.config/regreet/config.toml
+
+[gtk]
+theme-name = "Nordic"
+icon-theme-name = "Papirus-Dark"
+cursor-theme-name = "Bibata-Modern-Ice"
+
+[background]
+path = ""
+color = "#2E3440"
+
+[time]
+enabled = true
+format = "%H:%M"
+format-full = "%A, %B %d, %Y"
+font = "Noto Sans 48"
+color = "#ECEFF4"
+x = 50
+y = 20
+
+[weather]
+enabled = true
+command = "/home/dave/nixos-dotfiles/modules/themes/regreet/weather.sh"
+interval = 300
+font = "Noto Sans 24"
+color = "#88C0D0"
+x = 50
+y = 30
+
+[layout]
+hide-titlebar = true
+background-color = "#2E3440"
+background-image = ""
+
+[command]
+session-command = ""
+
+[css]
+style = '''
+window {
+    background-color: #2E3440;
+}
+
+.login-box {
+    background-color: #3B4252;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.username-entry, .password-entry {
+    background-color: #434C5E;
+    color: #ECEFF4;
+    border: 2px solid #5E81AC;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.username-entry:focus, .password-entry:focus {
+    border-color: #88C0D0;
+    background-color: #4C566A;
+}
+
+.login-button {
+    background-color: #5E81AC;
+    color: #ECEFF4;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: bold;
+}
+
+.login-button:hover {
+    background-color: #88C0D0;
+}
+
+.time-label {
+    color: #ECEFF4;
+    font-weight: 300;
+}
+
+.weather-label {
+    color: #88C0D0;
+    font-weight: 400;
+}
+
+.user-list {
+    background-color: #3B4252;
+    border-radius: 8px;
+}
+
+.user-item {
+    color: #D8DEE9;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.user-item:hover {
+    background-color: #434C5E;
+    color: #ECEFF4;
+}
+
+.user-item:selected {
+    background-color: #5E81AC;
+    color: #ECEFF4;
+}
+'''

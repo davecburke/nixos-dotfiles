@@ -8,6 +8,10 @@
             url = "github:nix-community/home-manager/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        stylix = {
+            url = "github:danth/stylix/release-25.11";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         # quickshell = {
         #     url = "github:outfoxxed/quickshell";
         #     inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +23,7 @@
         # };
     };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
+    outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, ... }@inputs: {
         nixosConfigurations.nixos-i3-gnome = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
@@ -93,6 +97,7 @@
         nixosConfigurations.nixos-niri = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = {
+                inherit inputs;
                 pkgsUnstable = import nixpkgs-unstable {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
@@ -100,7 +105,7 @@
             };
             modules = [
                 ./hosts/zbook/default.nix
-                ./modules/display-managers/gdm.nix
+                ./modules/display-managers/greetd.nix
                 ./modules/window-managers/niri/niri.nix
                 ./modules/core/fonts.nix
                 ./modules/core/programs.nix
@@ -116,6 +121,7 @@
                 # ./modules/programs/dunst/dunst.nix
                 # ./modules/programs/rofi/rofi.nix
                 ./modules/programs/noctalia/noctalia.nix
+                ./modules/themes/stylix/stylix-nord.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
