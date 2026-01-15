@@ -1,0 +1,11 @@
+{
+  "timezones": [
+    {
+      "name": "London",
+      "timezone": "Europe/London",
+      "enabled": true
+    }
+  ],
+  "rotationInterval": 5000,
+  "timeFormat": "h:mm A"
+}
