@@ -48,6 +48,31 @@
         "widgets": {
             "center": [
                 {
+                    "defaultSettings": {
+                        "rotationInterval": 5000,
+                        "showDate": true,
+                        "timeFormat": "HH:mm",
+                        "timezones": [
+                            {
+                                "enabled": true,
+                                "name": "New York",
+                                "timezone": "America/New_York"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "London",
+                                "timezone": "Europe/London"
+                            },
+                            {
+                                "enabled": true,
+                                "name": "Tokyo",
+                                "timezone": "Asia/Tokyo"
+                            }
+                        ]
+                    },
+                    "id": "plugin:world-clock"
+                },
+                {
                     "customFont": "",
                     "formatHorizontal": "hh:mm AP ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
@@ -65,6 +90,11 @@
                     "displayMode": "onhover",
                     "id": "Volume",
                     "middleClickCommand": "pwvucontrol || pavucontrol"
+                },
+                {
+                    "defaultSettings": {
+                    },
+                    "id": "plugin:weather"
                 }
             ],
             "left": [
@@ -165,7 +195,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "matugenSchemeType": "scheme-monochrome",
-        "predefinedScheme": "Everforest",
+        "predefinedScheme": "Nord",
         "schedulingMode": "off",
         "useWallpaperColors": false
     },
@@ -445,6 +475,14 @@
     },
     "templates": {
         "activeTemplates": [
+            {
+                "enabled": true,
+                "id": "alacritty"
+            },
+            {
+                "enabled": true,
+                "id": "niri"
+            }
         ],
         "enableUserTemplates": false
     },

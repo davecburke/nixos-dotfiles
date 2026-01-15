@@ -1,0 +1,21 @@
+{
+    "id": "noctalia-weather",
+    "name": "Noctalia Weather",
+    "version": "1.0.0",
+    "minNoctaliaVersion": "3.6.0",
+    "author": "David Burke",
+    "license": "MIT",
+    "repository": "https://github.com/nictalia/noctalia-plugins",
+    "description": "Display current weather and 5-day forecast using Noctalia's built-in LocationService",
+    "entryPoints": {
+        "main": "Main.qml",
+        "barWidget": "BarWidget.qml",
+        "panel": "Panel.qml"
+    },
+    "dependencies": {
+        "plugins": []
+    },
+    "metadata": {
+        "defaultSettings": {}
+    }
+}
