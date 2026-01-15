@@ -20,6 +20,8 @@
     # GNOME / GDM
     security.pam.services.gdm.fprintAuth = true;
     security.pam.services.gdm-password.fprintAuth = true;
+    security.pam.services.gdm.enableGnomeKeyring = true;
+    security.pam.services.gdm-password.enableGnomeKeyring = true;
 
     system.stateVersion = "25.11";
 }

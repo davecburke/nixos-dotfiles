@@ -1,12 +1,14 @@
 {
     "appLauncher": {
+        "autoPasteClipboard": false,
+        "clipboardWrapText": true,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
-        "pinnedExecs": [
+        "pinnedApps": [
         ],
         "position": "center",
         "screenshotAnnotationTool": "",
@@ -19,7 +21,6 @@
     },
     "audio": {
         "cavaFrameRate": 30,
-        "externalMixer": "pwvucontrol || pavucontrol",
         "mprisBlacklist": [
         ],
         "preferredPlayer": "",
@@ -61,7 +62,8 @@
                 },
                 {
                     "displayMode": "onhover",
-                    "id": "Volume"
+                    "id": "Volume",
+                    "middleClickCommand": "pwvucontrol || pavucontrol"
                 }
             ],
             "left": [
@@ -159,7 +161,6 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "matugenSchemeType": "scheme-monochrome",
@@ -256,6 +257,7 @@
         "pinnedApps": [
         ],
         "pinnedStatic": false,
+        "position": "bottom",
         "size": 1
     },
     "general": {
@@ -277,6 +279,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
+        "showChangelogOnStartup": true,
         "showHibernateOnLockScreen": false,
         "showScreenCorners": false,
         "showSessionButtonsOnLockScreen": true
@@ -293,11 +296,13 @@
     "location": {
         "analogClockInCalendar": false,
         "firstDayOfWeek": -1,
+        "hideWeatherCityName": false,
+        "hideWeatherTimezone": false,
         "name": "Melbourne, AU",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
-        "use12hourFormat": false,
+        "use12hourFormat": true,
         "useFahrenheit": false,
         "weatherEnabled": true,
         "weatherShowEffects": true
@@ -363,18 +368,6 @@
         ],
         "overlayLayer": true
     },
-    "screenRecorder": {
-        "audioCodec": "opus",
-        "audioSource": "default_output",
-        "colorRange": "limited",
-        "copyToClipboard": false,
-        "directory": "/home/dave/Videos",
-        "frameRate": 60,
-        "quality": "very_high",
-        "showCursor": true,
-        "videoCodec": "h264",
-        "videoSource": "portal"
-    },
     "sessionMenu": {
         "countdownDuration": 10000,
         "enableCountdown": true,
@@ -422,7 +415,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 37,
+    "settingsVersion": 39,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -472,18 +465,23 @@
         "walker": false,
         "wezterm": false,
         "yazi": false,
-        "zed": false
+        "zed": false,
+        "zenBrowser": false
     },
     "ui": {
+        "bluetoothDetailsViewMode": "grid",
+        "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": false,
         "fontDefault": "JetBrainsMono Nerd Font Propo",
         "fontDefaultScale": 1,
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
+        "networkPanelView": "ethernet",
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",
-        "tooltipsEnabled": true
+        "tooltipsEnabled": true,
+        "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
         "directory": "/home/dave/.config/themes/wallpaper",

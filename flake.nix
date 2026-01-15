@@ -12,15 +12,6 @@
             url = "github:danth/stylix/release-25.11";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        # quickshell = {
-        #     url = "github:outfoxxed/quickshell";
-        #     inputs.nixpkgs.follows = "nixpkgs";
-        # };
-        # noctalia = {
-        #     url = "github:noctalia-dev/noctalia-shell";
-        #     inputs.nixpkgs.follows = "nixpkgs";
-        #     inputs.quickshell.follows = "quickshell";
-        # };
     };
 
     outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, stylix, ... }@inputs: {
@@ -105,7 +96,7 @@
             };
             modules = [
                 ./hosts/zbook/default.nix
-                ./modules/display-managers/greetd.nix
+                ./modules/display-managers/gdm.nix
                 ./modules/window-managers/niri/niri.nix
                 ./modules/core/fonts.nix
                 ./modules/core/programs.nix
@@ -118,8 +109,6 @@
                 ./modules/core/unfree.nix
                 ./modules/core/bluetooth.nix
                 ./modules/core/power.nix
-                # ./modules/programs/dunst/dunst.nix
-                # ./modules/programs/rofi/rofi.nix
                 ./modules/programs/noctalia/noctalia.nix
                 ./modules/themes/stylix/stylix-nord.nix
                 home-manager.nixosModules.home-manager

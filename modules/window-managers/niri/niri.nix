@@ -2,6 +2,7 @@
 
 {
     programs.niri.enable = true;
+    programs.nm-applet.enable = true;
 
     environment.systemPackages = with pkgs; [
         #ghostty

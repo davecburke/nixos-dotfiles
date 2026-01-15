@@ -4,10 +4,9 @@
     services.gnome.evolution-data-server.enable = true;
 
     environment.systemPackages = with pkgsUnstable; [
-        (noctalia-shell.override { calendarSupport = true; })
-        evolution
-        evolution-ews
-        evolution-data-server
         gnome-keyring
     ];
+
+    xdg.portal.enable = true;
+    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 }
