@@ -24,5 +24,6 @@
         swaybg
         swaylock
         satty
+        gvfs
     ];
 }
