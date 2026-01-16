@@ -32,15 +32,34 @@
         pkgs.slack
         pkgs.libreoffice
         pkgs.virt-viewer
-        pkgs.xfce.thunar
+        # pkgs.xfce.thunar
+        pkgs.nautilus
         pkgs.qalculate-gtk
         pkgs.quickshell
         pkgs.seahorse  # For managing gnome-keyring passwords
         pkgs.gnome-text-editor
+        pkgs.gvfs
     ];
 
     services.hyprpolkitagent.enable = true;
     services.gnome-keyring.enable = true;
+
+    # programs.firefox = {
+    #     enable = true;
+
+    #     # profiles = {
+    #     #     default = {
+    #     #         id = 0;
+    #     #         # bookmarks, extensions, search engines...
+    #     #     };
+    #     #     dev-edition-default = {
+    #     #         id = 1;
+    #     #         # bookmarks, extensions, search engines...
+    #     #     };
+    #     # };
+    # };
+
+    stylix.targets.firefox.profileNames = [ "default" "dev-edition-default" ];
 
     xdg.configFile."themes" = {
         source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/themes;

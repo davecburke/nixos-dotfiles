@@ -1,8 +1,8 @@
 {
   "timezones": [
     {
-      "name": "London",
-      "timezone": "Europe/London",
+      "name": "New York",
+      "timezone": "America/New_York",
       "enabled": true
     }
   ],

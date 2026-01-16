@@ -31,16 +31,16 @@
     "bar": {
         "backgroundOpacity": 0.93,
         "capsuleOpacity": 1,
-        "density": "comfortable",
+        "density": "compact",
         "exclusive": true,
         "floating": false,
-        "hideOnOverview": false,
+        "hideOnOverview": true,
         "marginHorizontal": 4,
         "marginVertical": 4,
         "monitors": [
             "DP-2"
         ],
-        "outerCorners": false,
+        "outerCorners": true,
         "position": "top",
         "showCapsule": true,
         "showOutline": false,
@@ -477,11 +477,27 @@
         "activeTemplates": [
             {
                 "enabled": true,
+                "id": "niri"
+            },
+            {
+                "enabled": true,
                 "id": "alacritty"
             },
             {
                 "enabled": true,
-                "id": "niri"
+                "id": "gtk"
+            },
+            {
+                "enabled": true,
+                "id": "kcolorscheme"
+            },
+            {
+                "enabled": true,
+                "id": "qt"
+            },
+            {
+                "enabled": true,
+                "id": "code"
             }
         ],
         "enableUserTemplates": false

@@ -1,0 +1,17 @@
+[config]
+
+[templates]
+
+# User-defined templates
+# Add your custom templates below
+# Example:
+# [templates.myapp]
+# input_path = "~/.config/noctalia/templates/myapp.css"
+# output_path = "~/.config/myapp/theme.css"
+# post_hook = "myapp --reload-theme"
+
+# Remove this section and add your own templates
+#[templates.placeholder]
+#input_path = "/nix/store/hghjwp1rkgmbs9ynd84knvdc4ipjg20r-noctalia-shell-2026-01-15_58dbed2/share/noctalia-shell/Assets/MatugenTemplates/noctalia.json"
+#output_path = "/home/dave/.cache/noctalia/placeholder.json"
+

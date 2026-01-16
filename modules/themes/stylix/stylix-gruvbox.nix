@@ -8,7 +8,7 @@
         enable = true;
 
         # Nord palette - using base16-schemes package
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark.yaml";
 
         image = ../wallpaper/current.jpg;
 

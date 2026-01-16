@@ -115,6 +115,8 @@
                 ./modules/core/power.nix
                 ./modules/programs/noctalia/noctalia.nix
                 ./modules/themes/stylix/stylix-nord.nix
+                ./modules/themes/nordic.nix
+                # ./modules/themes/gtk.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
@@ -127,7 +129,8 @@
                                 config.allowUnfree = true;
                             };
                         };
-                        backupFileExtension = "backup";
+                        backupFileExtension = "hm-backup";
+                        overwriteBackup = true;
                     };
                 }
             ];
