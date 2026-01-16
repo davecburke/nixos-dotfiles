@@ -40,6 +40,7 @@ Rectangle {
 
   // Weather icon
   readonly property string weatherIcon: weatherReady ? LocationService.weatherSymbolFromCode(currentWeatherCode) : ""
+  readonly property string weatherDescription: weatherReady ? LocationService.weatherDescriptionFromCode(currentWeatherCode) : ""
 
   implicitWidth: Math.max(60, isVertical ? (Style.capsuleHeight || 32) : contentWidth)
   implicitHeight: Math.max(32, isVertical ? contentHeight : (Style.capsuleHeight || 32))
@@ -64,28 +65,28 @@ Rectangle {
 
   readonly property string tooltipText: {
     if (!weatherReady) return pluginApi?.tr("weather.no-data") || "Weather data unavailable";
+    return displayTemp + " - " + weatherDescription;
+    // var lines = [displayTemp];
     
-    var lines = [displayTemp];
-    
-    // Add next 4 days forecast
-    var forecastDays = Math.min(4, weather.daily.time.length - 1);
-    for (var i = 1; i <= forecastDays; i++) {
-      var weatherDate = new Date(weather.daily.time[i].replace(/-/g, "/"));
-      var dayName = I18n.locale.toString(weatherDate, "ddd");
+    // // Add next 4 days forecast
+    // var forecastDays = Math.min(4, weather.daily.time.length - 1);
+    // for (var i = 1; i <= forecastDays; i++) {
+    //   var weatherDate = new Date(weather.daily.time[i].replace(/-/g, "/"));
+    //   var dayName = I18n.locale.toString(weatherDate, "ddd");
       
-      var max = weather.daily.temperature_2m_max[i];
-      var min = weather.daily.temperature_2m_min[i];
-      if (Settings.data.location.useFahrenheit) {
-        max = LocationService.celsiusToFahrenheit(max);
-        min = LocationService.celsiusToFahrenheit(min);
-      }
-      max = Math.round(max);
-      min = Math.round(min);
+    //   var max = weather.daily.temperature_2m_max[i];
+    //   var min = weather.daily.temperature_2m_min[i];
+    //   if (Settings.data.location.useFahrenheit) {
+    //     max = LocationService.celsiusToFahrenheit(max);
+    //     min = LocationService.celsiusToFahrenheit(min);
+    //   }
+    //   max = Math.round(max);
+    //   min = Math.round(min);
       
-      lines.push(`${dayName}: ${max}°/${min}°`);
-    }
+    //   lines.push(`${dayName}: ${max}°/${min}°`);
+    // }
     
-    return lines.join("\n");
+    // return lines.join("\n");
   }
 
   // Horizontal layout
