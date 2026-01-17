@@ -1,4 +1,4 @@
-{ config, pkgs, pkgsUnstable ? pkgs, ... }:
+{ config, pkgs, pkgsUnstable ? pkgs, inputs, ... }:
 
 {
     imports = [
@@ -43,6 +43,60 @@
 
     services.hyprpolkitagent.enable = true;
     services.gnome-keyring.enable = true;
+    services.swayidle =
+    let
+        noctaliaShell = inputs.noctalia.packages.x86_64-linux.default;
+        # Lock command - use full path so swayidle can find it
+        lock = "${noctaliaShell}/bin/noctalia-shell ipc call lockScreen lock";
+        # TODO: modify "display" function based on your window manager
+        # Sway
+        #display = status: "${pkgs.sway}/bin/swaymsg 'output * power ${status}'";
+        # Hyprland
+        # display = status: "hyprctl dispatch dpms ${status}";
+        # Niri
+        display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
+    in
+    {
+        enable = true;
+        timeouts = [
+            {
+                timeout = 300; # in seconds
+                command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
+            }
+            {
+                timeout = 305;
+                command = lock;
+            }
+            {
+                timeout = 365;
+                command = display "off";
+                resumeCommand = display "on";
+            }
+            {
+                timeout = 370;
+                command = "${pkgs.systemd}/bin/systemctl suspend";
+            }
+        ];
+        events = [
+            {
+                event = "before-sleep";
+                # adding duplicated entries for the same event may not work
+                command = (display "off") + "; " + lock;
+            }
+            {
+                event = "after-resume";
+                command = display "on";
+            }
+            {
+                event = "lock";
+                command = (display "off") + "; " + lock;
+            }
+            {
+                event = "unlock";
+                command = display "on";
+            }
+        ];
+    };
 
     # programs.firefox = {
     #     enable = true;

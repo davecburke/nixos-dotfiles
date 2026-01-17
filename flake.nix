@@ -123,8 +123,9 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.dave = { config, pkgs, ... }: import ./home/dave-niri.nix {
-                            inherit config pkgs;
+                        extraSpecialArgs = { inherit inputs; };
+                        users.dave = { config, pkgs, inputs, ... }: import ./home/dave-niri.nix {
+                            inherit config pkgs inputs;
                             pkgsUnstable = import nixpkgs-unstable {
                                 system = "x86_64-linux";
                                 config.allowUnfree = true;
