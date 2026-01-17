@@ -116,6 +116,7 @@
                 ./modules/programs/noctalia/noctalia.nix
                 ./modules/themes/stylix/stylix-nord.nix
                 ./modules/themes/nordic.nix
+                ./modules/programs/fastfetch/fastfetch.nix
                 # ./modules/themes/gtk.nix
                 home-manager.nixosModules.home-manager
                 {
