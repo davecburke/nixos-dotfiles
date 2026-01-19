@@ -33,20 +33,4 @@
         satty
         gvfs
     ];
-
-    #niri
-    xdg.configFile."niri" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/niri/config;
-        recursive = true;
-        force = true;
-    };
-
-    #cliphist
-    home.file.".config/cliphist/launch.sh" = {
-        source = ../modules/programs/cliphist/launch.sh;
-        executable = true;
-    };
-    home.file.".config/cliphist/static_entries.txt" = {
-        source = ../modules/programs/cliphist/static_entries.txt;
-    };
 }
