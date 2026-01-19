@@ -25,6 +25,7 @@
         ],
         "preferredPlayer": "",
         "visualizerType": "linear",
+        "volumeFeedback": false,
         "volumeOverdrive": false,
         "volumeStep": 5
     },
@@ -145,6 +146,7 @@
                     "showMemoryAsPercent": false,
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
+                    "showSwapUsage": false,
                     "useMonospaceFont": true,
                     "usePrimaryColor": false
                 },
@@ -193,9 +195,9 @@
     },
     "colorSchemes": {
         "darkMode": true,
+        "extractionMethod": "default",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-monochrome",
         "predefinedScheme": "Nord",
         "schedulingMode": "off",
         "useWallpaperColors": false
@@ -362,6 +364,7 @@
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
+        "enableMediaToast": false,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -449,7 +452,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 40,
+    "settingsVersion": 41,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -468,6 +471,8 @@
         "memPollingInterval": 3000,
         "memWarningThreshold": 80,
         "networkPollingInterval": 3000,
+        "swapCriticalThreshold": 90,
+        "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
         "tempPollingInterval": 3000,
         "tempWarningThreshold": 80,
@@ -501,7 +506,7 @@
                 "id": "code"
             }
         ],
-        "enableUserTemplates": false
+        "enableUserTheming": false
     },
     "ui": {
         "bluetoothDetailsViewMode": "grid",

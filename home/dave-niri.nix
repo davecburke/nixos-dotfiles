@@ -39,6 +39,7 @@
         pkgs.seahorse  # For managing gnome-keyring passwords
         pkgs.gnome-text-editor
         pkgs.gvfs
+        # pkgsUnstable.neovim
     ];
 
     services.hyprpolkitagent.enable = true;
@@ -123,6 +124,12 @@
 
     xdg.configFile."noctalia" = {
         source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/noctalia/config;
+        recursive = true;
+        force = true;
+    };
+
+    xdg.configFile."nvim" = {
+        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/nvim/config;
         recursive = true;
         force = true;
     };

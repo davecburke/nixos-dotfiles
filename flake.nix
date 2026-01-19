@@ -117,6 +117,7 @@
                 ./modules/themes/stylix/stylix-nord.nix
                 ./modules/themes/nordic.nix
                 ./modules/programs/fastfetch/fastfetch.nix
+                # ./modules/programs/nvim/nvim.nix
                 # ./modules/themes/gtk.nix
                 home-manager.nixosModules.home-manager
                 {
