@@ -44,6 +44,32 @@
 
     services.hyprpolkitagent.enable = true;
     services.gnome-keyring.enable = true;
+    
+    # Systemd user service for noctalia-shell to ensure it's always running
+    # This fixes the issue where keybinds don't work after rebuild switch
+    # The service will automatically start on login and restart if it crashes
+    systemd.user.services.noctalia-shell =
+    let
+        noctaliaShell = inputs.noctalia.packages.x86_64-linux.default;
+    in
+    {
+        Unit = {
+            Description = "Noctalia Shell";
+            After = [ "graphical-session.target" "graphical-session-pre.target" ];
+            PartOf = [ "graphical-session.target" ];
+        };
+        Service = {
+            Type = "simple";
+            ExecStart = "${noctaliaShell}/bin/noctalia-shell";
+            Restart = "on-failure";
+            RestartSec = 5;
+            # Environment is automatically inherited from user session
+        };
+        Install = {
+            WantedBy = [ "graphical-session.target" ];
+        };
+    };
+    
     services.swayidle =
     let
         noctaliaShell = inputs.noctalia.packages.x86_64-linux.default;
