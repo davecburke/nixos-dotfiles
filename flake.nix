@@ -113,10 +113,10 @@
                 ./modules/core/unfree.nix
                 ./modules/core/bluetooth.nix
                 ./modules/core/power.nix
-                ./modules/programs/noctalia/noctalia.nix
+                # ./modules/programs/noctalia/noctalia.nix
                 ./modules/themes/stylix/stylix-nord.nix
                 ./modules/themes/nordic.nix
-                ./modules/programs/fastfetch/fastfetch.nix
+                # ./modules/programs/fastfetch/fastfetch.nix
                 # ./modules/programs/nvim/nvim.nix
                 # ./modules/themes/gtk.nix
                 home-manager.nixosModules.home-manager
@@ -124,13 +124,15 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        extraSpecialArgs = { inherit inputs; };
-                        users.dave = { config, pkgs, inputs, ... }: import ./home/dave-niri.nix {
-                            inherit config pkgs inputs;
+                        extraSpecialArgs = { 
+                            inherit inputs;
                             pkgsUnstable = import nixpkgs-unstable {
                                 system = "x86_64-linux";
                                 config.allowUnfree = true;
                             };
+                        };
+                        users.dave = { config, pkgs, inputs, pkgsUnstable, ... }: import ./home/dave-niri.nix {
+                            inherit config pkgs inputs pkgsUnstable;
                         };
                         backupFileExtension = "hm-backup";
                         overwriteBackup = true;

@@ -3,6 +3,9 @@
 {
     imports = [
         ../modules/programs/ssh/ssh.nix
+        ../modules/programs/alacritty/alacritty.nix
+        ../modules/programs/noctalia/noctalia.nix
+        ../modules/programs/fastfetch/fastfetch.nix
     ];
     
     home.username = "dave";
@@ -147,25 +150,7 @@
         recursive = true;
         force = true;
     };
-
-    xdg.configFile."noctalia" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/noctalia/config;
-        recursive = true;
-        force = true;
-    };
-
-    xdg.configFile."nvim" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/nvim/config;
-        recursive = true;
-        force = true;
-    };
-
-    xdg.configFile."fastfetch" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/fastfetch/config;
-        recursive = true;
-        force = true;
-    };
-
+    
     programs.zsh = {
         enable = true;
         enableCompletion = true;
@@ -200,6 +185,9 @@
         [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
         '';
     };
+
+        #zsh powerlevel10k config
+    home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
     
     home.sessionVariables = {
         NPM_CONFIG_PREFIX = "$HOME/.npm-global";
@@ -209,23 +197,4 @@
     home.sessionPath = [
         "$HOME/.npm-global/bin"
     ];
-
-    #cliphist
-    home.file.".config/cliphist/launch.sh" = {
-        source = ../modules/programs/cliphist/launch.sh;
-        executable = true;
-    };
-    home.file.".config/cliphist/static_entries.txt" = {
-        source = ../modules/programs/cliphist/static_entries.txt;
-    };
-
-    #zsh powerlevel10k config
-    home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
-
-    #niri
-    xdg.configFile."niri" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/niri/config;
-        recursive = true;
-        force = true;
-    };
 }
