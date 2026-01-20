@@ -7,14 +7,17 @@
     # This allows Nautilus to discover Synology NAS and other network devices
     services.avahi = {
         enable = true;
-        nssmdns = true;  # Use mDNS for hostname resolution
+        nssmdns4 = true;  # Use mDNS for hostname resolution
     };
 
-    # GNOME Online Accounts for Google Drive and other cloud services
-    services.gnome.gnome-online-accounts.enable = true;
+    # # GNOME Online Accounts for Google Drive and other cloud services
+    # services.gnome.gnome-online-accounts.enable = true;
     
-    # Accounts daemon required for GNOME Online Accounts
-    services.accounts-daemon.enable = true;
+    # # Accounts daemon required for GNOME Online Accounts
+    # services.accounts-daemon.enable = true;
+
+    # # Dconf backend required for GNOME Online Accounts configuration
+    # programs.dconf.enable = true;
 
     # Optional: Install Samba client utilities for manual mounting if needed
     environment.systemPackages = with pkgs; [
