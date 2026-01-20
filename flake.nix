@@ -113,6 +113,7 @@
                 ./modules/core/unfree.nix
                 ./modules/core/bluetooth.nix
                 ./modules/core/power.nix
+                ./modules/core/gvfs.nix
                 # ./modules/programs/noctalia/noctalia.nix
                 ./modules/themes/stylix/stylix-nord.nix
                 ./modules/themes/nordic.nix
