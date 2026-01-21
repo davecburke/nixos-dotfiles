@@ -197,7 +197,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "extractionMethod": "default",
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "predefinedScheme": "Nord",
