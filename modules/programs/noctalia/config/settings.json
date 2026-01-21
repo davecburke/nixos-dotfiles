@@ -528,7 +528,7 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
-        "directory": "/home/dave/Pictures/Wallpapers",
+        "directory": "/home/dave/.config/themes/wallpaper",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",
