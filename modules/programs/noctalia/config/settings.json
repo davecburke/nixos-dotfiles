@@ -34,7 +34,7 @@
         "capsuleOpacity": 1,
         "density": "compact",
         "exclusive": true,
-        "floating": false,
+        "floating": true,
         "hideOnOverview": true,
         "marginHorizontal": 4,
         "marginVertical": 4,
@@ -130,6 +130,7 @@
                 {
                     "deviceNativePath": "",
                     "displayMode": "onhover",
+                    "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
@@ -200,6 +201,7 @@
         "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
+        "monitorForColors": "",
         "predefinedScheme": "Nord",
         "schedulingMode": "off",
         "useWallpaperColors": false
@@ -289,7 +291,7 @@
         "inactiveIndicators": false,
         "monitors": [
         ],
-        "onlySameOutput": true,
+        "onlySameOutput": false,
         "pinnedApps": [
         ],
         "pinnedStatic": false,
@@ -331,6 +333,7 @@
         "screenLock": "",
         "screenUnlock": "",
         "session": "",
+        "startup": "",
         "wallpaperChange": ""
     },
     "location": {
@@ -456,7 +459,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 41,
+    "settingsVersion": 42,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -528,6 +531,7 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
+        "automationEnabled": false,
         "directory": "/home/dave/.config/themes/wallpaper",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
@@ -538,7 +542,6 @@
         ],
         "overviewEnabled": false,
         "panelPosition": "follow_bar",
-        "randomEnabled": false,
         "randomIntervalSec": 300,
         "recursiveSearch": false,
         "setWallpaperOnAllMonitors": true,
@@ -547,12 +550,12 @@
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
         "useSolidColor": false,
-        "useWallhaven": false,
+        "useWallhaven": true,
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
-        "wallhavenQuery": "",
+        "wallhavenQuery": "p8mmoj",
         "wallhavenRatios": "",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",

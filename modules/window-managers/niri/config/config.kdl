@@ -358,6 +358,12 @@ window-rule {
     opacity 0.8
 }
 
+// Exception: Keep YouTube windows fully opaque when inactive.
+window-rule {
+    match is-active=false title=r#".*YouTube.*"#
+    opacity 1.0
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
