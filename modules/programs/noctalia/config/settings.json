@@ -30,9 +30,9 @@
         "volumeStep": 5
     },
     "bar": {
-        "backgroundOpacity": 0.93,
+        "backgroundOpacity": 0,
         "capsuleOpacity": 1,
-        "density": "compact",
+        "density": "comfortable",
         "exclusive": true,
         "floating": false,
         "hideOnOverview": true,
@@ -41,13 +41,13 @@
         "monitors": [
             "DP-2"
         ],
-        "outerCorners": true,
+        "outerCorners": false,
         "position": "top",
         "screenOverrides": [
         ],
         "showCapsule": true,
         "showOutline": false,
-        "useSeparateOpacity": false,
+        "useSeparateOpacity": true,
         "widgets": {
             "center": [
                 {
@@ -234,7 +234,7 @@
             }
         ],
         "diskPath": "/",
-        "position": "close_to_bar_button",
+        "position": "center",
         "shortcuts": {
             "left": [
                 {
@@ -459,7 +459,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 42,
+    "settingsVersion": 43,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -524,9 +524,9 @@
         "fontFixed": "JetBrainsMono Nerd Font Mono",
         "fontFixedScale": 1,
         "networkPanelView": "ethernet",
-        "panelBackgroundOpacity": 0.93,
-        "panelsAttachedToBar": true,
-        "settingsPanelMode": "attached",
+        "panelBackgroundOpacity": 1,
+        "panelsAttachedToBar": false,
+        "settingsPanelMode": "centered",
         "tooltipsEnabled": true,
         "wifiDetailsViewMode": "grid"
     },
@@ -543,14 +543,15 @@
         "overviewEnabled": false,
         "panelPosition": "follow_bar",
         "randomIntervalSec": 300,
-        "recursiveSearch": false,
         "setWallpaperOnAllMonitors": true,
+        "showHiddenFiles": false,
         "solidColor": "#1a1a2e",
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
         "useSolidColor": false,
         "useWallhaven": true,
+        "viewMode": "single",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",

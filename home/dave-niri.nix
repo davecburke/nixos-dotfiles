@@ -44,6 +44,7 @@
         pkgs.gvfs
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
         # pkgsUnstable.neovim
+        # pkgsUnstable.dms-shell  # Dark Material Shell
     ];
 
     services.hyprpolkitagent.enable = true;
