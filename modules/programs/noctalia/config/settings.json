@@ -34,7 +34,7 @@
         "capsuleOpacity": 1,
         "density": "compact",
         "exclusive": true,
-        "floating": true,
+        "floating": false,
         "hideOnOverview": true,
         "marginHorizontal": 4,
         "marginVertical": 4,
