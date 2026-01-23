@@ -42,6 +42,8 @@
         pkgs.seahorse  # For managing gnome-keyring passwords
         pkgs.gnome-text-editor
         pkgs.gvfs
+        pkgs.loupe
+        pkgs.mpv
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
         # pkgsUnstable.neovim
         # pkgsUnstable.dms-shell  # Dark Material Shell
