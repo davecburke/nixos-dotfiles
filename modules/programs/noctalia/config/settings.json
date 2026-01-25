@@ -6,6 +6,7 @@
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": true,
+        "enableSettingsSearch": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
         "pinnedApps": [
@@ -198,7 +199,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
+        "generationMethod": "vibrant",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
@@ -459,7 +460,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 43,
+    "settingsVersion": 44,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -550,13 +551,13 @@
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
         "useSolidColor": false,
-        "useWallhaven": true,
+        "useWallhaven": false,
         "viewMode": "single",
-        "wallhavenApiKey": "",
+        "wallhavenApiKey": "y8Lo73RjpeBLD9dCXnm9DPomPnd1JQdd",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
-        "wallhavenPurity": "100",
-        "wallhavenQuery": "p8mmoj",
+        "wallhavenPurity": "111",
+        "wallhavenQuery": "",
         "wallhavenRatios": "",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",
