@@ -22,6 +22,7 @@ Item {
   // Weather data
   readonly property bool weatherReady: Settings.data.location.weatherEnabled && (LocationService.data.weather !== null)
   readonly property var weather: LocationService.data.weather
+  readonly property bool isDaytime: weatherReady ? weather.current_weather.is_day : true
 
   anchors.fill: parent
 
@@ -50,7 +51,7 @@ Item {
 
         NIcon {
           Layout.alignment: Qt.AlignVCenter
-          icon: root.weatherReady ? LocationService.weatherSymbolFromCode(root.weather.current_weather.weathercode) : ""
+          icon: root.weatherReady ? LocationService.weatherSymbolFromCode(root.weather.current_weather.weathercode, root.isDaytime) : ""
           pointSize: Style.fontSizeXXXL * 1.75 || 56
           color: Color.mPrimary || "#2196F3"
           visible: root.weatherReady
@@ -116,7 +117,7 @@ Item {
             }
             NIcon {
               Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-              icon: LocationService.weatherSymbolFromCode(root.weather.daily.weathercode[index])
+              icon: LocationService.weatherSymbolFromCode(root.weather.daily.weathercode[index], root.isDaytime)
               pointSize: Style.fontSizeXXL * 1.6 || 32
               color: Color.mPrimary || "#2196F3"
             }

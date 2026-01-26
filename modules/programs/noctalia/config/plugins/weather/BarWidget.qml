@@ -24,6 +24,7 @@ Rectangle {
   readonly property var weather: LocationService.data.weather
   readonly property int currentWeatherCode: weatherReady ? weather.current_weather.weathercode : 0
   readonly property real currentTemp: weatherReady ? weather.current_weather.temperature : 0
+  readonly property bool isDaytime: weatherReady ? weather.current_weather.is_day : true
 
   // Temperature display
   readonly property string displayTemp: {
@@ -39,7 +40,7 @@ Rectangle {
   }
 
   // Weather icon
-  readonly property string weatherIcon: weatherReady ? LocationService.weatherSymbolFromCode(currentWeatherCode) : ""
+  readonly property string weatherIcon: weatherReady ? LocationService.weatherSymbolFromCode(currentWeatherCode, isDaytime) : ""
   readonly property string weatherDescription: weatherReady ? LocationService.weatherDescriptionFromCode(currentWeatherCode) : ""
 
   implicitWidth: Math.max(60, isVertical ? (Style.capsuleHeight || 32) : contentWidth)
