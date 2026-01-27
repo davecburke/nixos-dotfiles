@@ -6,3 +6,4 @@ git commit --amend --no-edit
 config push git@github-personal:davecburke/dotfiles.git
 brscan-skey
 python3 -m http.server
+sf org login web --alias GreenhamUAT --instance-url https://test.salesforce.com
