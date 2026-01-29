@@ -7,7 +7,7 @@ import qs.Services.UI
 import qs.Widgets
 
 // Weather Bar Widget Component
-Rectangle {
+Item {
   id: root
 
   property var pluginApi: null
@@ -17,7 +17,35 @@ Rectangle {
   property string widgetId: ""
   property string section: ""
 
-  readonly property bool isVertical: Settings.data.bar.position === "left" || Settings.data.bar.position === "right"
+  // Bar positioning properties (per-screen for correct sizing)
+  readonly property string screenName: screen?.name ?? ""
+  readonly property string barPosition: Settings.getBarPositionForScreen(screenName)
+  readonly property bool isVertical: barPosition === "left" || barPosition === "right"
+  readonly property real barHeight: Style.getBarHeightForScreen(screenName)
+  readonly property real capsuleHeight: Style.getCapsuleHeightForScreen(screenName)
+  readonly property real barFontSize: Style.getBarFontSizeForScreen(screenName)
+
+  // Explicit content size (world-clock style): tight width, extra padding so "C" isn't on the edge
+  readonly property real visualContentWidth: {
+    if (isVertical) return capsuleHeight;
+    var iconW = Style.toOdd(capsuleHeight * 0.6);
+    var textW = tempText ? tempText.implicitWidth : 50;
+    return iconW + textW + Style.marginM + Style.marginL;
+  }
+  readonly property real visualContentHeight: {
+    if (!isVertical) return capsuleHeight;
+    var iconH = Style.toOdd(capsuleHeight * 0.45);
+    var textH = barFontSize * 0.7 * 1.4;
+    return iconH + textH + Style.marginS * 2 + Style.marginM * 2;
+  }
+  readonly property real contentWidth: isVertical ? capsuleHeight : visualContentWidth
+  readonly property real contentHeight: isVertical ? visualContentHeight : capsuleHeight
+
+  implicitWidth: contentWidth
+  implicitHeight: contentHeight
+
+  Layout.fillWidth: false
+  Layout.fillHeight: false
 
   // Weather data
   readonly property bool weatherReady: Settings.data.location.weatherEnabled && (LocationService.data.weather !== null)
@@ -26,7 +54,6 @@ Rectangle {
   readonly property real currentTemp: weatherReady ? weather.current_weather.temperature : 0
   readonly property bool isDaytime: weatherReady ? weather.current_weather.is_day : true
 
-  // Temperature display
   readonly property string displayTemp: {
     if (!weatherReady) return "--";
     var temp = currentTemp;
@@ -39,124 +66,91 @@ Rectangle {
     return `${temp}°${suffix}`;
   }
 
-  // Weather icon
   readonly property string weatherIcon: weatherReady ? LocationService.weatherSymbolFromCode(currentWeatherCode, isDaytime) : ""
   readonly property string weatherDescription: weatherReady ? LocationService.weatherDescriptionFromCode(currentWeatherCode) : ""
-
-  implicitWidth: Math.max(60, isVertical ? (Style.capsuleHeight || 32) : contentWidth)
-  implicitHeight: Math.max(32, isVertical ? contentHeight : (Style.capsuleHeight || 32))
-  radius: Style.radiusM || 8
-  color: Style.capsuleColor || "#1E1E1E"
-  border.color: Style.capsuleBorderColor || "#2E2E2E"
-  border.width: Style.capsuleBorderWidth || 1
-
-  readonly property real contentWidth: {
-    if (isVertical) return Style.capsuleHeight || 32;
-    var iconWidth = Style.toOdd ? Style.toOdd(Style.capsuleHeight * 0.6) : 20;
-    var textWidth = tempText ? tempText.implicitWidth : 50;
-    // Add extra padding on the right to prevent text from being too close to edge
-    return iconWidth + textWidth + (Style.marginM || 8) + (Style.marginL || 12);
-  }
-
-  readonly property real contentHeight: {
-    if (!isVertical) return Style.capsuleHeight || 32;
-    var iconHeight = Style.toOdd ? Style.toOdd(Style.capsuleHeight * 0.6) : 20;
-    return iconHeight + (Style.marginS || 4) * 2;
-  }
 
   readonly property string tooltipText: {
     if (!weatherReady) return pluginApi?.tr("weather.no-data") || "Weather data unavailable";
     return displayTemp + " - " + weatherDescription;
-    // var lines = [displayTemp];
-    
-    // // Add next 4 days forecast
-    // var forecastDays = Math.min(4, weather.daily.time.length - 1);
-    // for (var i = 1; i <= forecastDays; i++) {
-    //   var weatherDate = new Date(weather.daily.time[i].replace(/-/g, "/"));
-    //   var dayName = I18n.locale.toString(weatherDate, "ddd");
-      
-    //   var max = weather.daily.temperature_2m_max[i];
-    //   var min = weather.daily.temperature_2m_min[i];
-    //   if (Settings.data.location.useFahrenheit) {
-    //     max = LocationService.celsiusToFahrenheit(max);
-    //     min = LocationService.celsiusToFahrenheit(min);
-    //   }
-    //   max = Math.round(max);
-    //   min = Math.round(min);
-      
-    //   lines.push(`${dayName}: ${max}°/${min}°`);
-    // }
-    
-    // return lines.join("\n");
   }
 
-  // Horizontal layout
-  RowLayout {
-    anchors.fill: parent
-    anchors.leftMargin: isVertical ? 0 : (Style.marginM || 8)
-    anchors.rightMargin: isVertical ? 0 : (Style.marginL || 12)
-    anchors.topMargin: isVertical ? (Style.marginS || 4) : 0
-    anchors.bottomMargin: isVertical ? (Style.marginS || 4) : 0
-    spacing: Style.marginS || 4
-    visible: !isVertical
+  Rectangle {
+    id: visualCapsule
+    x: Style.pixelAlignCenter(parent.width, width)
+    y: Style.pixelAlignCenter(parent.height, height)
+    width: root.contentWidth
+    height: root.contentHeight
+    radius: Style.radiusM
+    color: mouseArea.containsMouse ? Color.mHover : Style.capsuleColor
+    border.color: Style.capsuleBorderColor
+    border.width: Style.capsuleBorderWidth
 
-    NIcon {
-      icon: root.weatherIcon
-      color: Color.mPrimary || "#2196F3"
-      pointSize: Style.toOdd ? Style.toOdd(Style.capsuleHeight * 0.5) : 16
-      Layout.alignment: Qt.AlignVCenter
-      visible: weatherReady && weatherIcon !== ""
+    // Horizontal layout (fill + marginM left, marginL right for padding around "23°C")
+    RowLayout {
+      id: row
+      anchors.fill: parent
+      anchors.leftMargin: isVertical ? 0 : Style.marginM
+      anchors.rightMargin: isVertical ? 0 : Style.marginL
+      anchors.topMargin: isVertical ? Style.marginS : 0
+      anchors.bottomMargin: isVertical ? Style.marginS : 0
+      spacing: Style.marginXS
+      visible: !root.isVertical
+
+      NIcon {
+        icon: root.weatherIcon
+        color: mouseArea.containsMouse ? Color.mOnHover : Color.mPrimary
+        pointSize: Style.toOdd(root.capsuleHeight * 0.5)
+        Layout.alignment: Qt.AlignVCenter
+        visible: root.weatherReady && root.weatherIcon !== ""
+      }
+
+      NText {
+        id: tempText
+        text: root.displayTemp
+        color: mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
+        pointSize: root.barFontSize
+        applyUiScale: false
+        Layout.alignment: Qt.AlignVCenter
+      }
     }
 
-    NText {
-      id: tempText
-      text: root.displayTemp
-      color: Color.mOnSurface || "#FFFFFF"
-      pointSize: Style.barFontSize || 11
-      font.weight: Font.Bold
-      applyUiScale: false
-      Layout.alignment: Qt.AlignVCenter
+    // Vertical layout
+    ColumnLayout {
+      id: col
+      anchors.centerIn: parent
+      spacing: Style.marginXS
+      visible: root.isVertical
+
+      NIcon {
+        icon: root.weatherIcon
+        color: mouseArea.containsMouse ? Color.mOnHover : Color.mPrimary
+        pointSize: Style.toOdd(root.capsuleHeight * 0.45)
+        Layout.alignment: Qt.AlignHCenter
+        visible: root.weatherReady && root.weatherIcon !== ""
+      }
+
+      NText {
+        text: root.displayTemp
+        color: mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
+        pointSize: root.barFontSize * 0.7
+        applyUiScale: false
+        Layout.alignment: Qt.AlignHCenter
+        visible: root.weatherReady
+      }
     }
-  }
 
-  // Vertical layout
-  ColumnLayout {
-    anchors.fill: parent
-    anchors.margins: Style.marginS || 4
-    spacing: Style.marginXS || 2
-    visible: isVertical
-
-    NIcon {
-      icon: root.weatherIcon
-      color: Color.mPrimary || "#2196F3"
-      pointSize: Style.toOdd ? Style.toOdd(Style.capsuleHeight * 0.45) : 14
-      Layout.alignment: Qt.AlignHCenter
-      visible: weatherReady && weatherIcon !== ""
-    }
-
-    NText {
-      text: root.displayTemp
-      color: Color.mOnSurface || "#FFFFFF"
-      pointSize: (Style.barFontSize || 11) * 0.7
-      font.weight: Font.Bold
-      applyUiScale: false
-      Layout.alignment: Qt.AlignHCenter
-      visible: weatherReady
-    }
-  }
-
-  // Loading indicator when weather is not ready
-  Loader {
-    anchors.centerIn: parent
-    active: !weatherReady
-    sourceComponent: NBusyIndicator {
-      implicitWidth: Style.capsuleHeight * 0.5
-      implicitHeight: Style.capsuleHeight * 0.5
+    Loader {
+      anchors.centerIn: parent
+      active: !root.weatherReady
+      sourceComponent: NBusyIndicator {
+        implicitWidth: root.capsuleHeight * 0.5
+        implicitHeight: root.capsuleHeight * 0.5
+      }
     }
   }
 
-  // Mouse interaction
   MouseArea {
+    id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
@@ -173,7 +167,7 @@ Rectangle {
         TooltipService.show(root, tooltipText, BarService.getTooltipDirection());
       }
     }
-    
+
     onExited: {
       TooltipService.hide();
     }

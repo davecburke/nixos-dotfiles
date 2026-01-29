@@ -7,3 +7,10 @@ config push git@github-personal:davecburke/dotfiles.git
 brscan-skey
 python3 -m http.server
 sf org login web --alias GreenhamUAT --instance-url https://test.salesforce.com
+sudo nix-collect-garbage -d
+sudo nix flake update
+git diff flake.lock
+sudo nixos-rebuild switch --flake ~/nixos-dotfiles/.#nixos-i3-gnome
+nixos-version
+nixos-rebuild list-generations
+sudo nixos-rebuild switch --rollback
