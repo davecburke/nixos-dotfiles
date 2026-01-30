@@ -199,7 +199,6 @@
         # Add custom PATHs
         export PATH="$HOME/.local/bin:$PATH"
         export PATH="$HOME/.pyenv/shims:$PATH"
-        export PATH="$HOME/.npm-global/bin:$PATH"
         eval "$(pyenv init --path)"
         fastfetch
         [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
@@ -208,13 +207,14 @@
 
         #zsh powerlevel10k config
     home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
+    home.file.".local/bin".directory = true;
     
     home.sessionVariables = {
-        NPM_CONFIG_PREFIX = "$HOME/.npm-global";
-        JAVA_HOME = "${pkgs.jdk21_headless}";
+        NPM_CONFIG_PREFIX = "$HOME/.local/bin";
+        JAVA_HOME = "${pkgs.jdk21}";
     };
 
     home.sessionPath = [
-        "$HOME/.npm-global/bin"
+        "$HOME/.local/bin"
     ];
 }

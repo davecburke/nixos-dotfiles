@@ -69,11 +69,7 @@ sudo nixos-rebuild switch --flake ~/nixos-dotfiles/.#nixos-i3-gnome
 ## After Setup Instructions
 ### 1. Install Saleforce CLI
 ```bash
-npm install -g @salesforce/cli --prefix ~/.local
-```
-### 2. Set the JAVA path
-```JSON
-"salesforcedx-vscode-apex.java.home": "/etc/jvm/java-21"
+npm install -g @salesforce/cli
 ```
 ## Nix Commands
 ```bash

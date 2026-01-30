@@ -10,7 +10,7 @@
         jq
         nodejs
         python3
-        jdk21_headless
+        jdk21
         usbutils
         (writeShellApplication {
             name = "ns";
@@ -22,6 +22,8 @@
             excludeShellChecks = [ "SC2016" ];
         })
     ];
-    # Create /etc/jvm/java-21 -> <nix store path to the JDK>
-    environment.etc."jvm/java-21".source = pkgs.jdk21_headless;
+
+    programs.npm.settings = {
+        prefix = "$HOME/.local/bin";
+    };
 }
