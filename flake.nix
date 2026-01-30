@@ -99,7 +99,7 @@
                 };
             };
             modules = [
-                ./hosts/zbook/default.nix
+                ./hosts/probook/default.nix
                 ./modules/display-managers/gdm.nix
                 ./modules/window-managers/niri/niri.nix
                 ./modules/core/fonts.nix
