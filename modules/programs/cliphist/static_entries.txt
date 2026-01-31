@@ -14,3 +14,5 @@ sudo nixos-rebuild switch --flake ~/nixos-dotfiles/.#nixos-i3-gnome
 nixos-version
 nixos-rebuild list-generations
 sudo nixos-rebuild switch --rollback
+sf project retrieve start --metadata ApexClass ApexPage ApexTrigger ApexComponent LightningComponentBundle AuraDefinitionBundle --ignore-conflicts
+git@github-personal:davecburke/dotfiles.git

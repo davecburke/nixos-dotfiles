@@ -10,7 +10,7 @@
         jq
         nodejs
         python3
-        jdk21_headless
+        jdk21
         usbutils
         (writeShellApplication {
             name = "ns";
@@ -23,5 +23,5 @@
         })
     ];
     # Create /etc/jvm/java-21 -> <nix store path to the JDK>
-    environment.etc."jvm/java-21".source = pkgs.jdk21_headless;
+    environment.etc."jvm/java-21".source = pkgs.jdk21;
 }
