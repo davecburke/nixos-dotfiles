@@ -89,10 +89,11 @@
                 }
             ];
         };
-        nixosConfigurations.nixos-niri = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.nixos-niri-zbook = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = {
                 inherit inputs;
+                configName = "nixos-niri-zbook";
                 pkgsUnstable = import nixpkgs-unstable {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
@@ -125,8 +126,63 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        extraSpecialArgs = { 
+                        extraSpecialArgs = {
                             inherit inputs;
+                            configName = "nixos-niri-zbook";
+                            pkgsUnstable = import nixpkgs-unstable {
+                                system = "x86_64-linux";
+                                config.allowUnfree = true;
+                            };
+                        };
+                        users.dave = { config, pkgs, inputs, pkgsUnstable, ... }: import ./home/dave-niri.nix {
+                            inherit config pkgs inputs pkgsUnstable;
+                        };
+                        backupFileExtension = "hm-backup";
+                        overwriteBackup = true;
+                    };
+                }
+            ];
+        };
+        nixosConfigurations.nixos-niri-probook = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+                inherit inputs;
+                configName = "nixos-niri-probook";
+                pkgsUnstable = import nixpkgs-unstable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                };
+            };
+            modules = [
+                ./hosts/probook/default.nix
+                ./modules/display-managers/gdm.nix
+                ./modules/window-managers/niri/niri.nix
+                ./modules/core/fonts.nix
+                ./modules/core/programs.nix
+                ./modules/core/audio.nix
+                ./modules/core/locale.nix
+                ./modules/core/networking.nix
+                ./modules/core/nix.nix
+                ./modules/core/printing.nix
+                ./modules/core/system-packages.nix
+                ./modules/core/unfree.nix
+                ./modules/core/bluetooth.nix
+                ./modules/core/power.nix
+                ./modules/core/gvfs.nix
+                # ./modules/programs/noctalia/noctalia.nix
+                ./modules/themes/stylix/stylix-nord.nix
+                ./modules/themes/nordic.nix
+                # ./modules/programs/fastfetch/fastfetch.nix
+                # ./modules/programs/nvim/nvim.nix
+                # ./modules/themes/gtk.nix
+                home-manager.nixosModules.home-manager
+                {
+                    home-manager = {
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        extraSpecialArgs = {
+                            inherit inputs;
+                            configName = "nixos-niri-probook";
                             pkgsUnstable = import nixpkgs-unstable {
                                 system = "x86_64-linux";
                                 config.allowUnfree = true;

@@ -132,21 +132,6 @@
         ];
     };
 
-    # programs.firefox = {
-    #     enable = true;
-
-    #     # profiles = {
-    #     #     default = {
-    #     #         id = 0;
-    #     #         # bookmarks, extensions, search engines...
-    #     #     };
-    #     #     dev-edition-default = {
-    #     #         id = 1;
-    #     #         # bookmarks, extensions, search engines...
-    #     #     };
-    #     # };
-    # };
-
     stylix.targets.firefox.profileNames = [ "default" "dev-edition-default" ];
 
     xdg.configFile."themes" = {
@@ -199,7 +184,6 @@
         # Add custom PATHs
         export PATH="$HOME/.local/bin:$PATH"
         export PATH="$HOME/.pyenv/shims:$PATH"
-        export PATH="$HOME/.npm-global/bin:$PATH"
         eval "$(pyenv init --path)"
         fastfetch
         [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
@@ -208,13 +192,21 @@
 
         #zsh powerlevel10k config
     home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
+    home.file.".npmrc".text = ''
+        prefix=${config.home.homeDirectory}/.local
+    '';
+
+    home.activation.ensureLocalBin = ''
+  	mkdir -p "$HOME/.local/bin"
+	'';
     
     home.sessionVariables = {
-        NPM_CONFIG_PREFIX = "$HOME/.npm-global";
-        JAVA_HOME = "${pkgs.jdk21_headless}";
+        # npm puts executables in $PREFIX/bin, so use .local not .local/bin
+        NPM_CONFIG_PREFIX = "$HOME/.local";
+        JAVA_HOME = "${pkgs.jdk21}";
     };
 
     home.sessionPath = [
-        "$HOME/.npm-global/bin"
+        "$HOME/.local/bin"
     ];
 }
