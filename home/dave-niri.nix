@@ -3,8 +3,8 @@
 let
   lib = pkgs.lib;
   hostId = lib.removePrefix "nixos-niri-" configName;
-  repoPath = "/home/dave/nixos-dotfiles/modules/window-managers/niri";
-  configDir = "${repoPath}/config";
+  # Use home directory so path works on any machine (zbook, probook, etc.)
+  configDir = "${config.home.homeDirectory}/nixos-dotfiles/modules/window-managers/niri/config";
   
   # Host-specific output blocks for niri config
   outputsByHost = {
@@ -16,7 +16,6 @@ output "eDP-1" {
 }
 output "DP-2" {
 	mode "2560x1080@60.000"
-	scale 1
 	position x=0 y=0
 }'';
     probook = ''
@@ -27,7 +26,6 @@ output "eDP-1" {
 }
 output "HDMI-A-1" {
 	mode "2560x1080@60.000"
-	scale 1
 	position x=0 y=0
 }'';
   };
@@ -189,9 +187,13 @@ in
         force = true;
     };
 
-    # Write the merged niri config.kdl to the repo before symlinking
+    # Write the merged niri config.kdl to the repo before symlinking.
+    # If this doesn't run during nixos-rebuild switch, run: systemctl --user start home-manager-dave.service
     home.activation.niriMergedConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        set -e
+        mkdir -p ${configDir}
         cp ${mergedConfigFile} ${configDir}/config.kdl
+        echo "Niri config updated for host: ${hostId}"
     '';
 
     #niri
