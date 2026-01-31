@@ -1,4 +1,53 @@
-{ config, pkgs, pkgsUnstable ? pkgs, inputs, ... }:
+{ config, pkgs, pkgsUnstable ? pkgs, inputs, configName ? "nixos-niri-zbook", ... }:
+
+let
+  lib = pkgs.lib;
+  hostId = lib.removePrefix "nixos-niri-" configName;
+  repoPath = "/home/dave/nixos-dotfiles/modules/window-managers/niri";
+  configDir = "${repoPath}/config";
+  
+  # Host-specific output blocks for niri config
+  outputsByHost = {
+    zbook = ''
+output "eDP-1" {
+	mode "1920x1080@60.000"
+	scale 1
+	position x=-1920 y=0
+}
+output "DP-2" {
+	mode "2560x1080@60.000"
+	scale 1
+	position x=0 y=0
+}'';
+    probook = ''
+output "eDP-1" {
+	mode "1920x1080@60.000"
+	scale 1
+	position x=-1920 y=0
+}
+output "HDMI-A-1" {
+	mode "2560x1080@60.000"
+	scale 1
+	position x=0 y=0
+}'';
+  };
+  
+  hostOutputs = outputsByHost.${hostId} or outputsByHost.zbook;
+  baseConfig = builtins.readFile ../modules/window-managers/niri/config/config.kdl;
+  
+  # Replace the section between markers with host-specific outputs
+  mergedConfig = 
+    let
+      parts = lib.splitString "// BEGIN_HOST_OUTPUTS" baseConfig;
+      beforeMarker = builtins.head parts;
+      afterFirstMarker = builtins.elemAt parts 1;
+      afterParts = lib.splitString "// END_HOST_OUTPUTS" afterFirstMarker;
+      afterMarker = builtins.elemAt afterParts 1;
+    in
+      beforeMarker + "// BEGIN_HOST_OUTPUTS\n" + hostOutputs + "\n// END_HOST_OUTPUTS" + afterMarker;
+  
+  mergedConfigFile = pkgs.writeText "niri-config.kdl" mergedConfig;
+in
 
 {
     imports = [
@@ -140,9 +189,14 @@
         force = true;
     };
 
+    # Write the merged niri config.kdl to the repo before symlinking
+    home.activation.niriMergedConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        cp ${mergedConfigFile} ${configDir}/config.kdl
+    '';
+
     #niri
     xdg.configFile."niri" = {
-        source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/window-managers/niri/config;
+        source = config.lib.file.mkOutOfStoreSymlink configDir;
         recursive = true;
         force = true;
     };

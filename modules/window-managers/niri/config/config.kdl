@@ -78,15 +78,18 @@ input {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "DP-2" {
-	mode "2560x1080@60.000"
-	position x=0 y=0
-}
-
+// BEGIN_HOST_OUTPUTS
 output "eDP-1" {
-	mode "1920x1880@60.000"
+	mode "1920x1080@60.000"
+	scale 1
 	position x=-1920 y=0
 }
+output "DP-2" {
+	mode "2560x1080@60.000"
+	scale 1
+	position x=0 y=0
+}
+// END_HOST_OUTPUTS
 
 /-output "eDP-1" {
     // Uncomment this line to disable this output.
