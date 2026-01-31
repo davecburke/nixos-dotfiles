@@ -211,7 +211,10 @@ in
     xdg.configFile."cliphist/static_entries.txt" = {
         source = ../modules/programs/cliphist/static_entries.txt;
     };
-    
+
+    # Allow Stylix to overwrite existing gtk.css (e.g. from a previous manual setup)
+    xdg.configFile."gtk-3.0/gtk.css".force = true;
+
     programs.zsh = {
         enable = true;
         enableCompletion = true;
