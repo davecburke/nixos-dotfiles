@@ -2,7 +2,7 @@
 let
   hostId = lib.removePrefix "nixos-niri-" configName;
   repoPath = "/home/dave/nixos-dotfiles/modules/programs/noctalia";
-  outOfStoreConfigDir = "${repoPath}/config-${hostId}";
+  configDir = "${repoPath}/config";
 
   baseSettings = lib.importJSON ./config/settings.json;
   overridesByHost = {
@@ -44,15 +44,6 @@ let
   overrideSettings = overridesByHost.${hostId} or { };
   mergedSettings = lib.recursiveUpdate baseSettings overrideSettings;
   mergedSettingsFile = pkgs.writeText "noctalia-settings.json" (builtins.toJSON mergedSettings);
-  configDir = pkgs.runCommand "noctalia-config-${hostId}" {
-    src = ./config;
-    mergedSettings = mergedSettingsFile;
-  } ''
-    mkdir -p $out
-    cp -r $src/* $out/ 2>/dev/null || true
-    rm -f $out/settings.json
-    cp $mergedSettings $out/settings.json
-  '';
 in
 {
   home.packages = with pkgsUnstable; [
@@ -60,14 +51,13 @@ in
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  # Copy the built config (with merged settings.json) into the repo so we can symlink out-of-store.
-  home.activation.noctaliaConfigDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    rm -rf ${outOfStoreConfigDir}
-    cp -r ${configDir} ${outOfStoreConfigDir}
+  # Write the merged settings.json to the repo's config/ directory before symlinking.
+  home.activation.noctaliaMergedSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    cp ${mergedSettingsFile} ${configDir}/settings.json
   '';
 
   xdg.configFile."noctalia" = {
-    source = config.lib.file.mkOutOfStoreSymlink outOfStoreConfigDir;
+    source = config.lib.file.mkOutOfStoreSymlink configDir;
     recursive = true;
     force = true;
   };
