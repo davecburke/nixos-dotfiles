@@ -134,8 +134,8 @@
                                 config.allowUnfree = true;
                             };
                         };
-                        users.dave = { config, pkgs, inputs, pkgsUnstable, ... }: import ./home/dave-niri.nix {
-                            inherit config pkgs inputs pkgsUnstable;
+                        users.dave = { config, pkgs, inputs, pkgsUnstable, configName, ... }: import ./home/dave-niri.nix {
+                            inherit config pkgs inputs pkgsUnstable configName;
                         };
                         backupFileExtension = "hm-backup";
                         overwriteBackup = true;
@@ -188,8 +188,8 @@
                                 config.allowUnfree = true;
                             };
                         };
-                        users.dave = { config, pkgs, inputs, pkgsUnstable, ... }: import ./home/dave-niri.nix {
-                            inherit config pkgs inputs pkgsUnstable;
+                        users.dave = { config, pkgs, inputs, pkgsUnstable, configName, ... }: import ./home/dave-niri.nix {
+                            inherit config pkgs inputs pkgsUnstable configName;
                         };
                         backupFileExtension = "hm-backup";
                         overwriteBackup = true;
