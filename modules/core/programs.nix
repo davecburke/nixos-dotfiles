@@ -23,7 +23,6 @@
         })
     ];
 
-    programs.npm.settings = {
-        prefix = "$HOME/.local/bin";
-    };
+    #create /etc/jvm/java-21 -> <nix store path to the JDK>
+    environment.etc."jvm/java-21".source = pkgs.jdk21;
 }

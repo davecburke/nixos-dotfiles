@@ -146,7 +146,9 @@
     #     #     };
     #     # };
     # };
+# programs.npm module not available in home-manager 25.11; use home.file.".npmrc" below
 
+    
     stylix.targets.firefox.profileNames = [ "default" "dev-edition-default" ];
 
     xdg.configFile."themes" = {
@@ -207,10 +209,17 @@
 
         #zsh powerlevel10k config
     home.file.".p10k.zsh".source = config.lib.file.mkOutOfStoreSymlink /home/dave/nixos-dotfiles/modules/programs/zsh/config/.p10k.zsh;
-    home.file.".local/bin".directory = true;
+    home.file.".npmrc".text = ''
+        prefix=${config.home.homeDirectory}/.local
+    '';
+
+    home.activation.ensureLocalBin = ''
+  	mkdir -p "$HOME/.local/bin"
+	'';
     
     home.sessionVariables = {
-        NPM_CONFIG_PREFIX = "$HOME/.local/bin";
+        # npm puts executables in $PREFIX/bin, so use .local not .local/bin
+        NPM_CONFIG_PREFIX = "$HOME/.local";
         JAVA_HOME = "${pkgs.jdk21}";
     };
 
