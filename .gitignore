@@ -2,3 +2,4 @@
 result
 modules/programs/noctalia/config-zbook
 modules/programs/noctalia/config-probook
+flake.lock
