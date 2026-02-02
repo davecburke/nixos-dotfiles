@@ -54,10 +54,6 @@
         "outerCorners": false,
         "position": "top",
         "screenOverrides": [
-            {
-                "enabled": false,
-                "name": "DP-2"
-            }
         ],
         "showCapsule": true,
         "showOutline": false,
@@ -176,7 +172,7 @@
                     "usePrimaryColor": false
                 },
                 {
-                    "displayMode": "onhover",
+                    "displayMode": "alwaysShow",
                     "id": "Network"
                 },
                 {
