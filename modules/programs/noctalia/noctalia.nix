@@ -41,9 +41,25 @@ let
       osd = { monitors = [ "HDMI-A-1" ]; };
     };
   };
+
   overrideSettings = overridesByHost.${hostId} or { };
   mergedSettings = lib.recursiveUpdate baseSettings overrideSettings;
   mergedSettingsFile = pkgs.writeText "noctalia-settings.json" (builtins.toJSON mergedSettings);
+  overrideSettingsFile = pkgs.writeText "noctalia-overrides.json" (builtins.toJSON overrideSettings);
+
+  # Deep-merge: only monitor-related overrides are layered on top of live config.
+  mergeScript = ''
+    def deep_merge(a; b):
+      a as $a | b as $b
+      | if $b == null then $a
+        elif ($a|type) == "object" and ($b|type) == "object"
+        then ([$a, $b] | add | keys_unsorted) as $keys
+        | {} | reduce $keys[] as $k (.; .[$k] = deep_merge($a[$k]; $b[$k]))
+        else $b
+        end;
+    deep_merge(.[0]; .[1])
+  '';
+  mergeScriptFile = pkgs.writeText "noctalia-merge.jq" mergeScript;
 in
 {
   home.packages = with pkgsUnstable; [
@@ -51,9 +67,24 @@ in
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  # Write the merged settings.json to the repo's config/ directory before symlinking.
+  # Read live config, apply only monitor overrides (host-specific), write back.
   home.activation.noctaliaMergedSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    cp ${mergedSettingsFile} ${configDir}/settings.json
+    liveConfig="${configDir}/settings.json"
+    overridesFile="${overrideSettingsFile}"
+    jq=${pkgs.jq}/bin/jq
+
+    if [ ! -f "$liveConfig" ]; then
+      cp ${mergedSettingsFile} "$liveConfig"
+    else
+      tmp=$(mktemp)
+      if $jq -s -f ${mergeScriptFile} "$liveConfig" "$overridesFile" > "$tmp"; then
+        mv "$tmp" "$liveConfig"
+      else
+        rm -f "$tmp"
+        echo "noctalia: jq merge failed, leaving settings.json unchanged" >&2
+        exit 1
+      fi
+    fi
   '';
 
   xdg.configFile."noctalia" = {

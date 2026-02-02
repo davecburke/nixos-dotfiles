@@ -45,6 +45,27 @@ output "HDMI-A-1" {
       beforeMarker + "// BEGIN_HOST_OUTPUTS\n" + hostOutputs + "\n// END_HOST_OUTPUTS" + afterMarker;
   
   mergedConfigFile = pkgs.writeText "niri-config.kdl" mergedConfig;
+  hostOutputsFile = pkgs.writeText "niri-host-outputs.kdl" hostOutputs;
+
+  # Replace section between markers with host outputs (used at activation time).
+  awkScript = ''
+    BEGIN { inblock=0 }
+    /\/\/ BEGIN_HOST_OUTPUTS/ {
+      print
+      while ((getline line < hostfile) > 0) print line
+      close(hostfile)
+      inblock=1
+      next
+    }
+    inblock==1 && /\/\/ END_HOST_OUTPUTS/ {
+      print
+      inblock=0
+      next
+    }
+    inblock==1 { next }
+    { print }
+  '';
+  awkScriptFile = pkgs.writeText "niri-merge.awk" awkScript;
 in
 
 {
@@ -187,13 +208,27 @@ in
         force = true;
     };
 
-    # Write the merged niri config.kdl to the repo before symlinking.
-    # If this doesn't run during nixos-rebuild switch, run: systemctl --user start home-manager-dave.service
+    # Read live config.kdl, apply only host output block between markers, write back.
     home.activation.niriMergedConfig = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-        set -e
-        mkdir -p ${configDir}
-        cp ${mergedConfigFile} ${configDir}/config.kdl
-        echo "Niri config updated for host: ${hostId}"
+      set -e
+      liveConfig="${configDir}/config.kdl"
+      hostOutputsFile="${hostOutputsFile}"
+      awkScript=${awkScriptFile}
+
+      mkdir -p ${configDir}
+      if [ ! -f "$liveConfig" ]; then
+        cp ${mergedConfigFile} "$liveConfig"
+      else
+        tmp=$(mktemp)
+        if ${pkgs.gawk}/bin/awk -v hostfile="$hostOutputsFile" -f "$awkScript" "$liveConfig" > "$tmp"; then
+          mv "$tmp" "$liveConfig"
+        else
+          rm -f "$tmp"
+          echo "niri: awk merge failed, leaving config.kdl unchanged" >&2
+          exit 1
+        fi
+      fi
+      echo "Niri config updated for host: ${hostId}"
     '';
 
     #niri
