@@ -1,8 +1,8 @@
 {
   "timezones": [
     {
-      "name": "Chicago",
-      "timezone": "America/Chicago",
+      "name": "Karachi",
+      "timezone": "Asia/Karachi",
       "enabled": true
     }
   ],

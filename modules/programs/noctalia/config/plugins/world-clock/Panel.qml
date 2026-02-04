@@ -75,6 +75,7 @@ Item {
     { name: pluginApi?.tr("city.seoul"), timezone: "Asia/Seoul", region: "Asia" },
     { name: pluginApi?.tr("city.jakarta"), timezone: "Asia/Jakarta", region: "Asia" },
     { name: pluginApi?.tr("city.manila"), timezone: "Asia/Manila", region: "Asia" },
+    { name: pluginApi?.tr("city.karachi"), timezone: "Asia/Karachi", region: "Asia" },
     
     { name: pluginApi?.tr("city.sydney"), timezone: "Australia/Sydney", region: "Oceania" },
     { name: pluginApi?.tr("city.melbourne"), timezone: "Australia/Melbourne", region: "Oceania" },
