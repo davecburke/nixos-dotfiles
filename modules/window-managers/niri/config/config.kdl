@@ -401,7 +401,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     XF86Calculator { spawn "qalculate-gtk"; }
     // Print { spawn-sh "$HOME/.config/hypr/screenshot.sh"; }
-    Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty -f - --fullscreen --output-filename /tmp/satty-%Y-%m-%d_%H:%M:%S.png --annotation-size-factor 0.5"; }
+    Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty -f - --fullscreen --output-filename /tmp/satty-%Y-%m-%d_%H:%M:%S.png --annotation-size-factor 0.5 --initial-tool rectangle"; }
     Mod+C hotkey-overlay-title="Run an Application: Clipboard" { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
     Mod+Shift+E hotkey-overlay-title="Run an Application: Session Menu" { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     Mod+Shift+Return { spawn "google-chrome-stable";}
