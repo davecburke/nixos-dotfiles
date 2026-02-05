@@ -539,6 +539,10 @@
             {
                 "enabled": true,
                 "id": "code"
+            },
+            {
+                "enabled": true,
+                "id": "pywalfox"
             }
         ],
         "enableUserTheming": false

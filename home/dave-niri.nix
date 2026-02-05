@@ -47,6 +47,9 @@ output "HDMI-A-1" {
   mergedConfigFile = pkgs.writeText "niri-config.kdl" mergedConfig;
   hostOutputsFile = pkgs.writeText "niri-host-outputs.kdl" hostOutputs;
 
+  # Pywalfox: Python env with pywalfox for Firefox native messaging (syncs Pywal colors to Firefox)
+#   pywalfox = pkgs.python3.withPackages (ps: [ ps.pywalfox ]);
+
   # Replace section between markers with host outputs (used at activation time).
   awkScript = ''
     BEGIN { inblock=0 }
@@ -90,6 +93,26 @@ in
 
     home.stateVersion = "25.11";
 
+    programs.firefox = {
+      enable = true;
+
+      # Explicit profiles so exactly one is default and IDs are unique (required by HM assertion).
+      profiles = {
+        default = {
+          isDefault = true;
+        };
+        "dev-edition-default" = {
+          id = 1;
+          isDefault = false;
+        };
+      };
+
+      # Home Manager option (slightly different from NixOS):
+      nativeMessagingHosts = [
+        pkgs.pywalfox-native
+      ];
+    };
+
     home.packages = [
         pkgs.google-chrome
         pkgs.lazygit
@@ -98,6 +121,8 @@ in
         pkgsUnstable.code-cursor
         pkgs.meld
         pkgs.firefox-devedition
+        pkgs.pywal
+        pkgs.pywalfox-native
         pkgs.postman
         pkgs.brave
         pkgs.slack
