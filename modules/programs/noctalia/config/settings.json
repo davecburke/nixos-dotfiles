@@ -85,13 +85,13 @@
                     "id": "plugin:world-clock"
                 },
                 {
+                    "clockColor": "none",
                     "customFont": "",
                     "formatHorizontal": "hh:mm AP ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
                     "id": "Clock",
                     "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false,
-                    "usePrimaryColor": false
+                    "useCustomFont": false
                 },
                 {
                     "hideWhenZero": false,
@@ -125,6 +125,7 @@
                     "id": "Workspace",
                     "labelMode": "index",
                     "occupiedColor": "secondary",
+                    "pillSize": 0.6,
                     "reverseScroll": false,
                     "showApplications": false,
                     "showBadge": true,
@@ -144,13 +145,12 @@
             "right": [
                 {
                     "deviceNativePath": "",
-                    "displayMode": "onhover",
+                    "displayMode": "icon-always",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false,
-                    "warningThreshold": 30
+                    "showPowerProfiles": false
                 },
                 {
                     "compactMode": true,
@@ -159,8 +159,9 @@
                     "showCpuFreq": false,
                     "showCpuTemp": true,
                     "showCpuUsage": true,
-                    "showDiskAsFree": false,
+                    "showDiskAvailable": false,
                     "showDiskUsage": false,
+                    "showDiskUsageAsPercent": false,
                     "showGpuTemp": false,
                     "showLoadAverage": false,
                     "showMemoryAsPercent": false,
@@ -393,6 +394,8 @@
     },
     "notifications": {
         "backgroundOpacity": 1,
+        "batteryCriticalThreshold": 5,
+        "batteryWarningThreshold": 20,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
@@ -483,12 +486,14 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 46,
+    "settingsVersion": 47,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
-        "cpuPollingInterval": 3000,
+        "cpuPollingInterval": 1000,
         "cpuWarningThreshold": 80,
         "criticalColor": "",
+        "diskAvailCriticalThreshold": 10,
+        "diskAvailWarningThreshold": 20,
         "diskCriticalThreshold": 90,
         "diskPollingInterval": 3000,
         "diskWarningThreshold": 80,
@@ -499,9 +504,9 @@
         "gpuWarningThreshold": 80,
         "loadAvgPollingInterval": 3000,
         "memCriticalThreshold": 90,
-        "memPollingInterval": 3000,
+        "memPollingInterval": 1000,
         "memWarningThreshold": 80,
-        "networkPollingInterval": 3000,
+        "networkPollingInterval": 1000,
         "swapCriticalThreshold": 90,
         "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
