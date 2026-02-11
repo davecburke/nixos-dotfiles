@@ -407,7 +407,8 @@ binds {
     Mod+Shift+Return { spawn "google-chrome-stable";}
     Mod+Shift+F {spawn "nautilus";}
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    // Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+D hotkey-overlay-title="Run an Application: Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+X hotkey-overlay-title="Lock the Screen: noctalia" { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 

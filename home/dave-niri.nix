@@ -74,7 +74,7 @@ in
 {
     imports = [
         ../modules/programs/ssh/ssh.nix
-        ../modules/programs/alacritty/alacritty.nix
+        # ../modules/programs/alacritty/alacritty.nix
         ../modules/programs/noctalia/noctalia.nix
         ../modules/programs/fastfetch/fastfetch.nix
     ];
@@ -147,6 +147,7 @@ in
         pkgs.gvfs
         pkgs.loupe
         pkgs.mpv
+        pkgs.ghostty
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
         # pkgsUnstable.neovim
         # pkgsUnstable.dms-shell  # Dark Material Shell
@@ -154,6 +155,9 @@ in
 
     services.hyprpolkitagent.enable = true;
     services.gnome-keyring.enable = true;
+
+    # Reduce user systemd stop timeout to prevent long shutdown hangs
+    systemd.user.settings.Manager.DefaultTimeoutStopSec = "10s";
     
     # Systemd user service for noctalia-shell to ensure it's always running
     # This fixes the issue where keybinds don't work after rebuild switch
@@ -167,12 +171,15 @@ in
             Description = "Noctalia Shell";
             After = [ "graphical-session.target" "graphical-session-pre.target" ];
             PartOf = [ "graphical-session.target" ];
+            BindsTo = [ "graphical-session.target" ];  # Stop when graphical session ends
         };
         Service = {
             Type = "simple";
             ExecStart = "${noctaliaShell}/bin/noctalia-shell";
             Restart = "on-failure";
             RestartSec = 5;
+            TimeoutStopSec = 5;  # Don't wait long on shutdown
+            KillMode = "mixed";  # Kill main process, then children
             # Environment is automatically inherited from user session
         };
         Install = {
@@ -197,20 +204,20 @@ in
         enable = true;
         timeouts = [
             {
-                timeout = 300; # in seconds
+                timeout = 600; # in seconds
                 command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
             }
             {
-                timeout = 305;
+                timeout = 605;
                 command = lock;
             }
             {
-                timeout = 365;
+                timeout = 665;
                 command = display "off";
                 resumeCommand = display "on";
             }
             {
-                timeout = 370;
+                timeout = 670;
                 command = "${pkgs.systemd}/bin/systemctl suspend";
             }
         ];

@@ -6,12 +6,14 @@
         "clipboardWrapText": true,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
+        "density": "default",
         "enableClipPreview": true,
         "enableClipboardHistory": true,
         "enableSettingsSearch": true,
         "enableWindowsSearch": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
+        "overviewLayer": false,
         "pinnedApps": [
         ],
         "position": "center",
@@ -38,6 +40,7 @@
         "autoShowDelay": 150,
         "backgroundOpacity": 0,
         "barType": "simple",
+        "capsuleColorKey": "none",
         "capsuleOpacity": 1,
         "density": "default",
         "displayMode": "always_visible",
@@ -96,14 +99,17 @@
                 {
                     "hideWhenZero": false,
                     "hideWhenZeroUnread": false,
+                    "iconColor": "none",
                     "id": "NotificationHistory",
                     "showUnreadBadge": true,
                     "unreadBadgeColor": "primary"
                 },
                 {
                     "displayMode": "onhover",
+                    "iconColor": "none",
                     "id": "Volume",
-                    "middleClickCommand": "pwvucontrol || pavucontrol"
+                    "middleClickCommand": "pwvucontrol || pavucontrol",
+                    "textColor": "none"
                 },
                 {
                     "defaultSettings": {
@@ -139,6 +145,7 @@
                     "maxWidth": 145,
                     "scrollingMode": "hover",
                     "showIcon": true,
+                    "textColor": "none",
                     "useFixedWidth": false
                 }
             ],
@@ -155,6 +162,7 @@
                 {
                     "compactMode": true,
                     "diskPath": "/",
+                    "iconColor": "none",
                     "id": "SystemMonitor",
                     "showCpuFreq": false,
                     "showCpuTemp": true,
@@ -168,17 +176,20 @@
                     "showMemoryUsage": true,
                     "showNetworkStats": false,
                     "showSwapUsage": false,
-                    "useMonospaceFont": true,
-                    "usePrimaryColor": false
+                    "textColor": "none",
+                    "useMonospaceFont": true
                 },
                 {
                     "displayMode": "alwaysShow",
-                    "id": "Network"
+                    "iconColor": "none",
+                    "id": "Network",
+                    "textColor": "none"
                 },
                 {
                     "blacklist": [
                         "nm-applet"
                     ],
+                    "chevronColor": "none",
                     "colorizeIcons": false,
                     "drawerEnabled": true,
                     "hidePassive": false,
@@ -221,7 +232,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "vibrant",
+        "generationMethod": "content",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
@@ -329,15 +340,42 @@
         "autoStartAuth": false,
         "avatarImage": "/home/dave/.face",
         "boxRadiusRatio": 1,
+        "clockFormat": "hh\\nmm",
+        "clockStyle": "custom",
         "compactLockScreen": false,
         "dimmerOpacity": 0.2,
         "enableLockScreenCountdown": true,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
         "iRadiusRatio": 1,
+        "keybinds": {
+            "keyDown": [
+                "Down"
+            ],
+            "keyEnter": [
+                "Return"
+            ],
+            "keyEscape": [
+                "Esc"
+            ],
+            "keyLeft": [
+                "Left"
+            ],
+            "keyRight": [
+                "Right"
+            ],
+            "keyUp": [
+                "Up"
+            ]
+        },
         "language": "",
         "lockOnSuspend": true,
+        "lockScreenAnimations": false,
+        "lockScreenBlur": 0,
         "lockScreenCountdownDuration": 10000,
+        "lockScreenMonitors": [
+        ],
+        "lockScreenTint": 0,
         "radiusRatio": 1,
         "scaleRatio": 1,
         "screenRadiusRatio": 1,
@@ -394,9 +432,8 @@
     },
     "notifications": {
         "backgroundOpacity": 1,
-        "batteryCriticalThreshold": 5,
-        "batteryWarningThreshold": 20,
         "criticalUrgencyDuration": 15,
+        "enableBatteryToast": true,
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
         "enabled": true,
@@ -438,6 +475,9 @@
             "DP-2"
         ],
         "overlayLayer": true
+    },
+    "plugins": {
+        "autoUpdate": false
     },
     "sessionMenu": {
         "countdownDuration": 10000,
@@ -486,8 +526,10 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 47,
+    "settingsVersion": 51,
     "systemMonitor": {
+        "batteryCriticalThreshold": 5,
+        "batteryWarningThreshold": 20,
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 1000,
         "cpuWarningThreshold": 80,
@@ -543,6 +585,10 @@
             {
                 "enabled": true,
                 "id": "pywalfox"
+            },
+            {
+                "enabled": true,
+                "id": "ghostty"
             }
         ],
         "enableUserTheming": false
@@ -572,7 +618,9 @@
         "hideWallpaperFilenames": false,
         "monitorDirectories": [
         ],
+        "overviewBlur": 0.4,
         "overviewEnabled": false,
+        "overviewTint": 0.6,
         "panelPosition": "follow_bar",
         "randomIntervalSec": 300,
         "setWallpaperOnAllMonitors": true,

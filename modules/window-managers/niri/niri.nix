@@ -12,9 +12,9 @@
     xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
     environment.systemPackages = with pkgs; [
-        #ghostty
+        ghostty
         # foot
-        alacritty
+        # alacritty
         # waybar
         # hyprpaper
         # wofi

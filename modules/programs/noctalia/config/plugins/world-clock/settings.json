@@ -4,6 +4,11 @@
       "name": "Karachi",
       "timezone": "Asia/Karachi",
       "enabled": true
+    },
+    {
+      "name": "Chicago",
+      "timezone": "America/Chicago",
+      "enabled": true
     }
   ],
   "rotationInterval": 5000,
