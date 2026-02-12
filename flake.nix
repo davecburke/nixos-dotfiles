@@ -116,8 +116,8 @@
                 ./modules/core/power.nix
                 ./modules/core/gvfs.nix
                 # ./modules/programs/noctalia/noctalia.nix
-                ./modules/themes/stylix/stylix-nord.nix
-                ./modules/themes/nordic.nix
+                ./modules/themes/stylix/stylix-nord.nix  # Stylix styles gnome and chrome
+                # ./modules/themes/nordic.nix
                 # ./modules/programs/fastfetch/fastfetch.nix
                 # ./modules/programs/nvim/nvim.nix
                 # ./modules/themes/gtk.nix
