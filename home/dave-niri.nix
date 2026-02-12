@@ -148,10 +148,15 @@ in
         pkgs.loupe
         pkgs.mpv
         pkgs.ghostty
+        pkgs.btop
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
         # pkgsUnstable.neovim
         # pkgsUnstable.dms-shell  # Dark Material Shell
     ];
+
+    programs.btop.settings = {
+        color_theme = "noctalia";
+    };
 
     services.hyprpolkitagent.enable = true;
     services.gnome-keyring.enable = true;
