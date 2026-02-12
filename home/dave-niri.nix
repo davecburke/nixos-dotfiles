@@ -217,12 +217,12 @@ in
                 command = lock;
             }
             {
-                timeout = 665;
+                timeout = 965;
                 command = display "off";
                 resumeCommand = display "on";
             }
             {
-                timeout = 670;
+                timeout = 970;
                 command = "${pkgs.systemd}/bin/systemctl suspend";
             }
         ];
