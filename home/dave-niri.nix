@@ -74,7 +74,7 @@ in
 {
     imports = [
         ../modules/programs/ssh/ssh.nix
-        # ../modules/programs/alacritty/alacritty.nix
+        ../modules/programs/alacritty/alacritty.nix
         ../modules/programs/noctalia/noctalia.nix
         ../modules/programs/fastfetch/fastfetch.nix
     ];
@@ -147,7 +147,7 @@ in
         pkgs.gvfs
         pkgs.loupe
         pkgs.mpv
-        pkgs.ghostty
+        # pkgs.ghostty # Doesn't allow ctrl+i in ns. Create copy and paste though
         pkgs.btop
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
         # pkgsUnstable.neovim
