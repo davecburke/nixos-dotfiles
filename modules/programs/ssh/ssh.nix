@@ -73,7 +73,7 @@
             };
             
             "klipper" = {
-                hostname = "192.168.86.277";
+                hostname = "192.168.86.227";
                 user = "pi";
                 identityFile = "~/.ssh/id_rsa_personal";
                 identitiesOnly = true;
