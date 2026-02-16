@@ -147,6 +147,7 @@ in
         pkgs.gvfs
         pkgs.loupe
         pkgs.mpv
+        pkgs.rpi-imager
         # pkgs.ghostty # Doesn't allow ctrl+i in ns. Create copy and paste though
         pkgs.btop
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
