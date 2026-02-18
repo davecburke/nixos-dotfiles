@@ -1,0 +1,22 @@
+{
+  "id": "gmail-notifier-count",
+  "name": "Gmail Notifier Count",
+  "version": "1.0.0",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "David Burke",
+  "license": "MIT",
+  "repository": "",
+  "description": "Shows the count of active Gmail notifications (Notifier for Gmail) in the bar.",
+  "entryPoints": {
+    "main": "Main.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {
+      "hideWhenZero": false
+    }
+  }
+}
