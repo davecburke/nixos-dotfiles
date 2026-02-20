@@ -28,6 +28,9 @@ Item {
   readonly property bool hideWhenZero: cfg.hideWhenZero ?? defaults.hideWhenZero ?? false
 
   property int gmailUnreadCount: 0
+  property int otherNotificationCount: 0
+
+  readonly property bool hasOtherNotifications: otherNotificationCount > 0
 
   function isGmailNotifier(item) {
     var key = "notifier for gmail";
@@ -40,19 +43,27 @@ Item {
   function updateGmailCount() {
     if (typeof NotificationService === "undefined") {
       root.gmailUnreadCount = 0;
+      root.otherNotificationCount = 0;
       return;
     }
-    var ids = {};
-    function addGmailFromList(list) {
+    var gmailIds = {};
+    var otherIds = {};
+    function scanList(list) {
       if (!list) return;
       for (var i = 0; i < list.count; i++) {
         var item = list.get(i);
-        if (root.isGmailNotifier(item) && item.id) ids[item.id] = true;
+        if (!item.id) return;
+        if (root.isGmailNotifier(item)) {
+          gmailIds[item.id] = true;
+        } else {
+          otherIds[item.id] = true;
+        }
       }
     }
-    addGmailFromList(NotificationService.activeList);
-    addGmailFromList(NotificationService.historyList);
-    root.gmailUnreadCount = Object.keys(ids).length;
+    scanList(NotificationService.activeList);
+    scanList(NotificationService.historyList);
+    root.gmailUnreadCount = Object.keys(gmailIds).length;
+    root.otherNotificationCount = Object.keys(otherIds).length;
   }
 
   Connections {
@@ -112,11 +123,33 @@ Item {
       spacing: Style.marginXS
       visible: !isVertical
 
-      NIcon {
-        icon: "mail"
-        color: mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
-        pointSize: Style.toOdd(root.capsuleHeight * 0.5)
+      Item {
+        implicitWidth: root.capsuleHeight
+        implicitHeight: root.capsuleHeight
         Layout.alignment: Qt.AlignVCenter
+
+        NIcon {
+          id: mailIconH
+          icon: "mail"
+          color: mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
+          pointSize: Style.toOdd(root.capsuleHeight * 0.5)
+          anchors.centerIn: parent
+        }
+
+        Rectangle {
+          visible: root.hasOtherNotifications
+          width: 7
+          height: 7
+          radius: Style.radiusXS
+          color: mouseArea.containsMouse ? Color.mOnHover : Color.mPrimary
+          border.color: Color.mSurface
+          border.width: Style.borderS
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.verticalCenter: parent.verticalCenter
+          anchors.horizontalCenterOffset: root.capsuleHeight / 4
+          anchors.verticalCenterOffset: -root.capsuleHeight / 4
+          z: 2
+        }
       }
 
       NText {
@@ -135,11 +168,32 @@ Item {
       spacing: Style.marginXS
       visible: isVertical
 
-      NIcon {
-        icon: "mail"
-        pointSize: Style.toOdd(root.capsuleHeight * 0.45)
-        color: mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
+      Item {
+        implicitWidth: root.capsuleHeight
+        implicitHeight: root.capsuleHeight
         Layout.alignment: Qt.AlignHCenter
+
+        NIcon {
+          icon: "mail"
+          pointSize: Style.toOdd(root.capsuleHeight * 0.45)
+          color: mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
+          anchors.centerIn: parent
+        }
+
+        Rectangle {
+          visible: root.hasOtherNotifications
+          width: 7
+          height: 7
+          radius: Style.radiusXS
+          color: mouseArea.containsMouse ? Color.mOnHover : Color.mPrimary
+          border.color: Color.mSurface
+          border.width: Style.borderS
+          anchors.horizontalCenter: parent.horizontalCenter
+          anchors.verticalCenter: parent.verticalCenter
+          anchors.horizontalCenterOffset: root.capsuleHeight / 4
+          anchors.verticalCenterOffset: -root.capsuleHeight / 4
+          z: 2
+        }
       }
 
       NText {
