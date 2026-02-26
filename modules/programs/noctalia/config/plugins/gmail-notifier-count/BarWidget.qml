@@ -99,7 +99,7 @@ Item {
 
   readonly property string tooltipText: gmailUnreadCount === 0
     ? "No unread Gmail notifications"
-    : (gmailUnreadCount === 1 ? "1 unread Gmail notification" : (gmailUnreadCount + " unread Gmail notifications") + "\nClick to open notifications")
+    : (gmailUnreadCount === 1 ? "1 unread Gmail notification" : (gmailUnreadCount + " unread Gmail notifications"))
 
   Rectangle {
     id: visualCapsule
@@ -218,10 +218,10 @@ Item {
       var panel = typeof PanelService !== "undefined" && PanelService
         ? PanelService.getPanel("notificationHistoryPanel", root.screen)
         : null;
-      if (panel && typeof panel.open === "function") {
+      if (panel && typeof panel.toggle === "function") {
+        panel.toggle(root);
+      } else if (panel && typeof panel.open === "function") {
         panel.open();
-      } else if (panel && typeof panel.toggle === "function") {
-        panel.toggle();
       }
     }
 
