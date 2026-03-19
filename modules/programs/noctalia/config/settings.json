@@ -361,7 +361,7 @@
         "autoStartAuth": false,
         "avatarImage": "/home/dave/.face",
         "boxRadiusRatio": 1,
-        "clockFormat": "hh\\nmm",
+        "clockFormat": "h:mm AP ",
         "clockStyle": "custom",
         "compactLockScreen": false,
         "dimmerOpacity": 0.2,
