@@ -25,6 +25,7 @@
         pkgsUnstable.vscode
         pkgs.ksnip
         pkgsUnstable.code-cursor
+        pkgs.claude-code
         pkgs.meld
         pkgs.firefox-devedition
         pkgs.postman
