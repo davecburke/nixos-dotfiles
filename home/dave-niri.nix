@@ -154,6 +154,7 @@ in
         # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
         # pkgsUnstable.neovim
         # pkgsUnstable.dms-shell  # Dark Material Shell
+        pkgs.pipx
     ];
 
     programs.btop.settings = {
