@@ -52,7 +52,7 @@ Item {
       if (!list) return;
       for (var i = 0; i < list.count; i++) {
         var item = list.get(i);
-        if (!item.id) return;
+        if (!item.id) continue;
         if (root.isGmailNotifier(item)) {
           gmailIds[item.id] = true;
         } else {
@@ -60,18 +60,18 @@ Item {
         }
       }
     }
-    scanList(NotificationService.activeList);
-    scanList(NotificationService.historyList);
+    scanList(NotificationService.popupModel);
+    scanList(NotificationService.historyModel);
     root.gmailUnreadCount = Object.keys(gmailIds).length;
     root.otherNotificationCount = Object.keys(otherIds).length;
   }
 
   Connections {
-    target: typeof NotificationService !== "undefined" && NotificationService ? NotificationService.activeList : null
+    target: typeof NotificationService !== "undefined" && NotificationService ? NotificationService.popupModel : null
     function onCountChanged() { root.updateGmailCount(); }
   }
   Connections {
-    target: typeof NotificationService !== "undefined" && NotificationService ? NotificationService.historyList : null
+    target: typeof NotificationService !== "undefined" && NotificationService ? NotificationService.historyModel : null
     function onCountChanged() { root.updateGmailCount(); }
   }
 
