@@ -64,7 +64,7 @@ in
 {
   home.packages = with pkgsUnstable; [
     gnome-keyring
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    (inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override { calendarSupport = true; })
   ];
 
   # Read live config, apply only monitor overrides (host-specific), write back.

@@ -151,7 +151,8 @@ in
         pkgs.rpi-imager
         # pkgs.ghostty # Doesn't allow ctrl+i in ns. Create copy and paste though
         pkgs.btop
-        # pkgs.gnome-control-center  # For Online Accounts (Google Drive, etc.)
+        pkgs.gnome-control-center
+        pkgs.gnome-online-accounts
         # pkgsUnstable.neovim
         # pkgsUnstable.dms-shell  # Dark Material Shell
         pkgs.pipx
@@ -164,6 +165,23 @@ in
     services.hyprpolkitagent.enable = true;
     services.gnome-keyring.enable = true;
 
+    systemd.user.services.goa-daemon = {
+        Unit = {
+            Description = "GNOME Online Accounts Daemon";
+            After = [ "graphical-session.target" ];
+            PartOf = [ "graphical-session.target" ];
+        };
+        Service = {
+            Type = "dbus";
+            BusName = "org.gnome.OnlineAccounts";
+            ExecStart = "${pkgs.gnome-online-accounts}/libexec/goa-daemon";
+            Restart = "on-failure";
+        };
+        Install = {
+            WantedBy = [ "graphical-session.target" ];
+        };
+    };
+
     # Reduce user systemd stop timeout to prevent long shutdown hangs
     systemd.user.settings.Manager.DefaultTimeoutStopSec = "10s";
     
@@ -172,7 +190,7 @@ in
     # The service will automatically start on login and restart if it crashes
     systemd.user.services.noctalia-shell =
     let
-        noctaliaShell = inputs.noctalia.packages.x86_64-linux.default;
+        noctaliaShell = inputs.noctalia.packages.x86_64-linux.default.override { calendarSupport = true; };
     in
     {
         Unit = {
@@ -197,7 +215,7 @@ in
     
     services.swayidle =
     let
-        noctaliaShell = inputs.noctalia.packages.x86_64-linux.default;
+        noctaliaShell = inputs.noctalia.packages.x86_64-linux.default.override { calendarSupport = true; };
         # Lock command - use full path so swayidle can find it
         lock = "${noctaliaShell}/bin/noctalia-shell ipc call lockScreen lock";
         # TODO: modify "display" function based on your window manager
