@@ -4,8 +4,14 @@
       "name": "Karachi",
       "timezone": "Asia/Karachi",
       "enabled": true
+    },
+    {
+      "name": "Berlin",
+      "timezone": "Europe/Berlin",
+      "enabled": true
     }
   ],
   "rotationInterval": 5000,
+  "showDate": true,
   "timeFormat": "h:mm A"
 }
