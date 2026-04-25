@@ -117,6 +117,7 @@
                 ./modules/core/gvfs.nix
                 ./modules/programs/prusa-slicer/prusa-slicer.nix
                 ./modules/themes/stylix/stylix-nord.nix  # Stylix styles gnome and chrome
+                ./modules/programs/freecad/freecad.nix
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
