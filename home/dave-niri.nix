@@ -83,6 +83,7 @@ in
     home.homeDirectory = "/home/dave";
     programs.git = {
         enable = true;
+        package = pkgs.gitFull;
         settings = {
             user = {
                 name = "David Burke";

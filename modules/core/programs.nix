@@ -6,7 +6,7 @@
     programs.nix-ld.enable = true;
 
     environment.systemPackages = with pkgs; [
-        git
+        gitFull
         pyenv
         jq
         nodejs
