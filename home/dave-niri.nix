@@ -126,7 +126,7 @@ in
 
     home.packages = [
         pkgs.google-chrome
-        pkgs.lazygit
+        pkgsUnstable.lazygit
         pkgsUnstable.vscode
         # pkgs.ksnip
         pkgsUnstable.code-cursor
