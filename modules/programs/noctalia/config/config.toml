@@ -1,0 +1,35 @@
+[desktop_widgets]
+enabled = false
+
+[location]
+address = "Melbourne, AU"
+
+[osd]
+position = "top_right"
+monitors = [ "DP-2",]
+
+[shell]
+avatar_path = "/home/dave/.face"
+font_family = "JetBrainsMono Nerd Font Propo"
+time_format = "{:%I:%M %p}"
+
+[theme]
+builtin = "Nord"
+source = "builtin"
+
+[wallpaper]
+directory = "/home/dave/.config/themes/wallpaper"
+
+[weather]
+unit = "metric"
+
+[notification]
+monitors = [ "DP-2",]
+
+[bar.default]
+background_opacity = 0.0
+margin_edge = 4
+margin_ends = 4
+start = [ "workspaces", "active-window",]
+center = [ "clock",]
+end = [ "cpu", "temp", "ram", "network", "battery", "control-center", "session",]

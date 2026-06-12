@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(# Check the noctalia source for config file name *)",
+      "Read(//nix/store/**)",
+      "Bash(/nix/store/kanqvw6vvqsl48iynw1n7hia8af58c2z-noctalia-5.0.0/bin/noctalia config *)",
+      "Read(//tmp/**)"
+    ]
+  }
+}
